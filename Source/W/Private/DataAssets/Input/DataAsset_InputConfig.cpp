@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 
 #include "DataAssets/Input/DataAsset_InputConfig.h"

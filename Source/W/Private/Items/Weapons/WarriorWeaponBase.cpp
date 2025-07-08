@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 
 #include "Items/Weapons/WarriorWeaponBase.h"

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -20,7 +20,7 @@ enum class EWarriorAbilityActivationPolicy : uint8
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorGameplayAbility : public UGameplayAbility
+class W_API UWarriorGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 	

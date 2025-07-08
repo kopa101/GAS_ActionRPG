@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 
 #include "AI/BTService_OrientToTargetActor.h"

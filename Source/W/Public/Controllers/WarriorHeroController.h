@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroController : public APlayerController, public IGenericTeamAgentInterface
+class W_API AWarriorHeroController : public APlayerController, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 	

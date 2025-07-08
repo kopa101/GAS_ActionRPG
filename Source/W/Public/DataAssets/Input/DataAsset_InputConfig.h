@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -31,7 +31,7 @@ public:
  * 
  */
 UCLASS()
-class WARRIOR_API UDataAsset_InputConfig : public UDataAsset
+class W_API UDataAsset_InputConfig : public UDataAsset
 {
 	GENERATED_BODY()
 

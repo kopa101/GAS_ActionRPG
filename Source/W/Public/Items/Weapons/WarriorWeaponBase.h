@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@ class UBoxComponent;
 DECLARE_DELEGATE_OneParam(FOnTargetInteractedDelegate,AActor*)
 
 UCLASS()
-class WARRIOR_API AWarriorWeaponBase : public AActor
+class W_API AWarriorWeaponBase : public AActor
 {
 	GENERATED_BODY()
 	

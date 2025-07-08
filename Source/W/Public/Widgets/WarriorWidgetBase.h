@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ class UEnemyUIComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorWidgetBase : public UUserWidget
+class W_API UWarriorWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
 	

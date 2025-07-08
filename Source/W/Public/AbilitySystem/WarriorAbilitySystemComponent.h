@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorAbilitySystemComponent : public UAbilitySystemComponent
+class W_API UWarriorAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
 	

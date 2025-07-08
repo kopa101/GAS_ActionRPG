@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -20,7 +20,7 @@ enum class EToggleDamageType : uint8
  * 
  */
 UCLASS()
-class WARRIOR_API UPawnCombatComponent : public UPawnExtensionComponentBase
+class W_API UPawnCombatComponent : public UPawnExtensionComponentBase
 {
 	GENERATED_BODY()
 	

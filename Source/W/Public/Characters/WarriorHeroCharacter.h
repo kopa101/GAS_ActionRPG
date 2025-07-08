@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -17,7 +17,7 @@ class UHeroUIComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
+class W_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 {
 	GENERATED_BODY()
 

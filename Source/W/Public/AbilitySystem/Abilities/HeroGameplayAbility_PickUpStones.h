@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@ class AWarriorStoneBase;
  * 
  */
 UCLASS()
-class WARRIOR_API UHeroGameplayAbility_PickUpStones : public UWarriorHeroGameplayAbility
+class W_API UHeroGameplayAbility_PickUpStones : public UWarriorHeroGameplayAbility
 {
 	GENERATED_BODY()
 	

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroWeapon : public AWarriorWeaponBase
+class W_API AWarriorHeroWeapon : public AWarriorWeaponBase
 {
 	GENERATED_BODY()
 	

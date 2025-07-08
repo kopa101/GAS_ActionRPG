@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -20,7 +20,7 @@ enum class EProjectileDamagePolicy : uint8
 };
 
 UCLASS()
-class WARRIOR_API AWarriorProjectileBase : public AActor
+class W_API AWarriorProjectileBase : public AActor
 {
 	GENERATED_BODY()
 	

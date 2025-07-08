@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorBaseGameMode : public AGameModeBase
+class W_API AWarriorBaseGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 

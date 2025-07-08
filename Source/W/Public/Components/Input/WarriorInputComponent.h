@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorInputComponent : public UEnhancedInputComponent
+class W_API UWarriorInputComponent : public UEnhancedInputComponent
 {
 	GENERATED_BODY()
 	

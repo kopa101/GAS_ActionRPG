@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -14,7 +14,7 @@ class UBoxComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
+class W_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 {
 	GENERATED_BODY()
 	

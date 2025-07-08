@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -18,7 +18,7 @@ class UPawnCombatInterface : public UInterface
 /**
  * 
  */
-class WARRIOR_API IPawnCombatInterface
+class W_API IPawnCombatInterface
 {
 	GENERATED_BODY()
 

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ class UInputMappingContext;
  * 
  */
 UCLASS()
-class WARRIOR_API UHeroGameplayAbility_TargetLock : public UWarriorHeroGameplayAbility
+class W_API UHeroGameplayAbility_TargetLock : public UWarriorHeroGameplayAbility
 {
 	GENERATED_BODY()
 	

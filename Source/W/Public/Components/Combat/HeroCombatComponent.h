@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@ class AWarriorHeroWeapon;
  * 
  */
 UCLASS()
-class WARRIOR_API UHeroCombatComponent : public UPawnCombatComponent
+class W_API UHeroCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
 	

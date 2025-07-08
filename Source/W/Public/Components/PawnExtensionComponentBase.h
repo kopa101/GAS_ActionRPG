@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -8,7 +8,7 @@
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class WARRIOR_API UPawnExtensionComponentBase : public UActorComponent
+class W_API UPawnExtensionComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
 	

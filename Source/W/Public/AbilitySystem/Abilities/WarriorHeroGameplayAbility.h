@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -13,7 +13,7 @@ class AWarriorHeroController;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorHeroGameplayAbility : public UWarriorGameplayAbility
+class W_API UWarriorHeroGameplayAbility : public UWarriorGameplayAbility
 {
 	GENERATED_BODY()
 	

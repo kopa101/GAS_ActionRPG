@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ class UEnemyCombatComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorEnemyGameplayAbility : public UWarriorGameplayAbility
+class W_API UWarriorEnemyGameplayAbility : public UWarriorGameplayAbility
 {
 	GENERATED_BODY()
 	

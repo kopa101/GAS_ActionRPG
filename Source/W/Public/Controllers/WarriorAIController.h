@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ class UAISenseConfig_Sight;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorAIController : public AAIController
+class W_API AWarriorAIController : public AAIController
 {
 	GENERATED_BODY()
 	

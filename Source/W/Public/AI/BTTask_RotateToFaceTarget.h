@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -27,7 +27,7 @@ struct FRotateToFaceTargetTaskMemory
  * 
  */
 UCLASS()
-class WARRIOR_API UBTTask_RotateToFaceTarget : public UBTTaskNode
+class W_API UBTTask_RotateToFaceTarget : public UBTTaskNode
 {
 	GENERATED_BODY()
 	

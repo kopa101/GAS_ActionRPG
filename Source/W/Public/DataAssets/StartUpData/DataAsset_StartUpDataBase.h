@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -13,7 +13,7 @@ class UGameplayEffect;
  * 
  */
 UCLASS()
-class WARRIOR_API UDataAsset_StartUpDataBase : public UDataAsset
+class W_API UDataAsset_StartUpDataBase : public UDataAsset
 {
 	GENERATED_BODY()
 	

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UGEExecCalc_DamageTaken : public UGameplayEffectExecutionCalculation
+class W_API UGEExecCalc_DamageTaken : public UGameplayEffectExecutionCalculation
 {
 	GENERATED_BODY()
 	

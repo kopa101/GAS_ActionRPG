@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityTaskTickDelegate,float,Del
  * 
  */
 UCLASS()
-class WARRIOR_API UAbilityTask_ExecuteTaskOnTick : public UAbilityTask
+class W_API UAbilityTask_ExecuteTaskOnTick : public UAbilityTask
 {
 	GENERATED_BODY()
 	

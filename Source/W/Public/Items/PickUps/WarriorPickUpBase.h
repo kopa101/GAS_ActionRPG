@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -9,7 +9,7 @@
 class USphereComponent;
 
 UCLASS()
-class WARRIOR_API AWarriorPickUpBase : public AActor
+class W_API AWarriorPickUpBase : public AActor
 {
 	GENERATED_BODY()
 	

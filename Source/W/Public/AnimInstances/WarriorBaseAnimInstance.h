@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorBaseAnimInstance : public UAnimInstance
+class W_API UWarriorBaseAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 	

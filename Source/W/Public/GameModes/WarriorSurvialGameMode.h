@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -52,7 +52,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSurvialGameModeStateChangedDelega
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorSurvialGameMode : public AWarriorBaseGameMode
+class W_API AWarriorSurvialGameMode : public AWarriorBaseGameMode
 {
 	GENERATED_BODY()
 	

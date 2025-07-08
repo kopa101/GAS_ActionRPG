@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -12,7 +12,7 @@ class UCharacterMovementComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorCharacterAnimInstance : public UWarriorBaseAnimInstance
+class W_API UWarriorCharacterAnimInstance : public UWarriorBaseAnimInstance
 {
 	GENERATED_BODY()
 	

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -30,7 +30,7 @@ struct FWarriorGameLevelSet
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorGameInstance : public UGameInstance
+class W_API UWarriorGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 

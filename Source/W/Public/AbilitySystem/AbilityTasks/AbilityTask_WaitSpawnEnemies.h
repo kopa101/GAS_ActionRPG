@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -14,7 +14,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWaitSpawnEnemiesDelegate,const TArr
  * 
  */
 UCLASS()
-class WARRIOR_API UAbilityTask_WaitSpawnEnemies : public UAbilityTask
+class W_API UAbilityTask_WaitSpawnEnemies : public UAbilityTask
 {
 	GENERATED_BODY()
 	

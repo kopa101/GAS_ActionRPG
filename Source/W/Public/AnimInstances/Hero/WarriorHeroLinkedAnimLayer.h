@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -11,7 +11,7 @@ class UWarriorHeroAnimInstance;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorHeroLinkedAnimLayer : public UWarriorBaseAnimInstance
+class W_API UWarriorHeroLinkedAnimLayer : public UWarriorBaseAnimInstance
 {
 	GENERATED_BODY()
 	

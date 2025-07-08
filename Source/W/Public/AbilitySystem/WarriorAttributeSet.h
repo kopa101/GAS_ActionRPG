@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -19,7 +19,7 @@ GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorAttributeSet : public UAttributeSet
+class W_API UWarriorAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	

@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -16,7 +16,7 @@ class UWarriorGameInstance;
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorFunctionLibrary : public UBlueprintFunctionLibrary
+class W_API UWarriorFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	

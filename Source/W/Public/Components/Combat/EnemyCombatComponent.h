@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UEnemyCombatComponent : public UPawnCombatComponent
+class W_API UEnemyCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
 	

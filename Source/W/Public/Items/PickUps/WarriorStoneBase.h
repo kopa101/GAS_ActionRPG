@@ -1,4 +1,4 @@
-// Vince Petrelli All Rights Reserved
+
 
 #pragma once
 
@@ -13,7 +13,7 @@ class UGameplayEffect;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorStoneBase : public AWarriorPickUpBase
+class W_API AWarriorStoneBase : public AWarriorPickUpBase
 {
 	GENERATED_BODY()
 

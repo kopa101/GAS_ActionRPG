@@ -1,14 +1,14 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AnimInstances/WarriorCharacterAnimInstance.h"
-#include "Characters/WarriorBaseCharacter.h"
+#include "AnimInstances/WCharacterAnimInstance.h"
+#include "Characters/WBaseCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "KismetAnimationLibrary.h"
 
-void UWarriorCharacterAnimInstance::NativeInitializeAnimation()
+void UWCharacterAnimInstance::NativeInitializeAnimation()
 {
-	OwningCharacter = Cast<AWarriorBaseCharacter>(TryGetPawnOwner());
+	OwningCharacter = Cast<AWBaseCharacter>(TryGetPawnOwner());
 	 
 	if (OwningCharacter)
 	{
@@ -16,7 +16,7 @@ void UWarriorCharacterAnimInstance::NativeInitializeAnimation()
 	}
 }
 
-void UWarriorCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
+void UWCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 {
 	if (!OwningCharacter || !OwningMovementComponent)
 	{

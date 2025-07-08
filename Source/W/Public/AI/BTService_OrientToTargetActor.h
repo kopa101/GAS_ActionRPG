@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class WARRIOR_API UBTService_OrientToTargetActor : public UBTService
+class W_API UBTService_OrientToTargetActor : public UBTService
 {
 	GENERATED_BODY()
 	

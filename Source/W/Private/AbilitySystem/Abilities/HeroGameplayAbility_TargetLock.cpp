@@ -3,20 +3,20 @@
 
 #include "AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Characters/WarriorHeroCharacter.h"
+#include "Characters/WHeroCharacter.h"
 #include "Kismet/GameplayStatics.h"
-#include "Widgets/WarriorWidgetBase.h"
-#include "Controllers/WarriorHeroController.h"
+#include "Widgets/WWidgetBase.h"
+#include "Controllers/WHeroController.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/SizeBox.h"
-#include "WarriorFunctionLibrary.h"
-#include "WarriorGameplayTags.h"
+#include "WFunctionLibrary.h"
+#include "WGameplayTags.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
 void UHeroGameplayAbility_TargetLock::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {	
@@ -39,8 +39,8 @@ void UHeroGameplayAbility_TargetLock::EndAbility(const FGameplayAbilitySpecHandl
 void UHeroGameplayAbility_TargetLock::OnTargetLockTick(float DeltaTime)
 {
 	if (!CurrentLockedActor ||
-		UWarriorFunctionLibrary::NativeDoesActorHaveTag(CurrentLockedActor,WarriorGameplayTags::Shared_Status_Dead) ||
-		UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(), WarriorGameplayTags::Shared_Status_Dead)
+		UWFunctionLibrary::NativeDoesActorHaveTag(CurrentLockedActor,WGameplayTags::Shared_Status_Dead) ||
+		UWFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(), WGameplayTags::Shared_Status_Dead)
 		)
 	{
 		CancelTargetLockAbility();
@@ -50,9 +50,9 @@ void UHeroGameplayAbility_TargetLock::OnTargetLockTick(float DeltaTime)
 	SetTargetLockWidgetPosition();
 
 	const bool bShouldOverrideRotation =
-	!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Rolling)
+	!UWFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WGameplayTags::Player_Status_Rolling)
 	&&
-	!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Blocking);
+	!UWFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WGameplayTags::Player_Status_Blocking);
 	
 	if (bShouldOverrideRotation)
 	{
@@ -81,7 +81,7 @@ void UHeroGameplayAbility_TargetLock::SwitchTarget(const FGameplayTag& InSwitchD
 
 	GetAvailableActorsAroundTarget(ActorsOnLeft,ActorsOnRight);
 
-	if (InSwitchDirectionTag == WarriorGameplayTags::Player_Event_SwitchTarget_Left)
+	if (InSwitchDirectionTag == WGameplayTags::Player_Event_SwitchTarget_Left)
 	{
 		NewTargetToLock = GetNearestTargetFromAvailableActors(ActorsOnLeft);
 	}
@@ -194,7 +194,7 @@ void UHeroGameplayAbility_TargetLock::DrawTargetLockWidget()
 	{
 		checkf(TargetLockWidgetClass, TEXT("Forgot to assign a valid widget class in Blueprint"));
 
-		DrawnTargetLockWidget = CreateWidget<UWarriorWidgetBase>(GetHeroControllerFromActorInfo(), TargetLockWidgetClass);
+		DrawnTargetLockWidget = CreateWidget<UWWidgetBase>(GetHeroControllerFromActorInfo(), TargetLockWidgetClass);
 
 		check(DrawnTargetLockWidget);
 

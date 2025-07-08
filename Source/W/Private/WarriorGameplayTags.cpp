@@ -1,9 +1,9 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "WarriorGameplayTags.h"
+#include "WGameplayTags.h"
 
-namespace WarriorGameplayTags
+namespace WGameplayTags
 {
 	/** Input Tags **/
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move,"InputTag.Move");

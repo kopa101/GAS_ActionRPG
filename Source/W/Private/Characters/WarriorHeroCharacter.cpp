@@ -1,25 +1,25 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Characters/WarriorHeroCharacter.h"
+#include "Characters/WHeroCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "DataAssets/Input/DataAsset_InputConfig.h"
-#include "Components/Input/WarriorInputComponent.h"
-#include "WarriorGameplayTags.h"
-#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Components/Input/WInputComponent.h"
+#include "WGameplayTags.h"
+#include "AbilitySystem/WAbilitySystemComponent.h"
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
 #include "Components/Combat/HeroCombatComponent.h"
 #include "Components/UI/HeroUIComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "GameModes/WarriorBaseGameMode.h"
+#include "GameModes/WBaseGameMode.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
-AWarriorHeroCharacter::AWarriorHeroCharacter()
+AWHeroCharacter::AWHeroCharacter()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.f,96.f);
 
@@ -47,22 +47,22 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	HeroUIComponent = CreateDefaultSubobject<UHeroUIComponent>(TEXT("HeroUIComponent"));
 }
 
-UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponent() const
+UPawnCombatComponent* AWHeroCharacter::GetPawnCombatComponent() const
 {
 	return HeroCombatComponent;
 }
 
-UPawnUIComponent* AWarriorHeroCharacter::GetPawnUIComponent() const
+UPawnUIComponent* AWHeroCharacter::GetPawnUIComponent() const
 {
 	return HeroUIComponent;
 }
 
-UHeroUIComponent* AWarriorHeroCharacter::GetHeroUIComponent() const
+UHeroUIComponent* AWHeroCharacter::GetHeroUIComponent() const
 {
 	return HeroUIComponent;
 }
 
-void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+void AWHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
@@ -72,26 +72,26 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 		{	
 			int32 AbilityApplyLevel = 1;
 
-			if (AWarriorBaseGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AWarriorBaseGameMode>())
+			if (AWBaseGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AWBaseGameMode>())
 			{
 				switch (BaseGameMode->GetCurrentGameDifficulty())
 				{
-				case EWarriorGameDifficulty::Easy:
+				case EWGameDifficulty::Easy:
 					AbilityApplyLevel = 4;
 					Debug::Print(TEXT("Current Difficulty: Easy"));
 					break;
 
-				case EWarriorGameDifficulty::Normal:
+				case EWGameDifficulty::Normal:
 					AbilityApplyLevel = 3;
 					Debug::Print(TEXT("Current Difficulty: Normal"));
 					break;
 
-				case EWarriorGameDifficulty::Hard:
+				case EWGameDifficulty::Hard:
 					AbilityApplyLevel = 2;
 					Debug::Print(TEXT("Current Difficulty: Hard"));
 					break;
 
-				case EWarriorGameDifficulty::VeryHard:
+				case EWGameDifficulty::VeryHard:
 					AbilityApplyLevel = 1;
 					Debug::Print(TEXT("Current Difficulty: Very Hard"));
 					break;
@@ -101,12 +101,12 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 				}
 			}
 			
-			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
+			LoadedData->GiveToAbilitySystemComponent(WAbilitySystemComponent,AbilityApplyLevel);
 		}
 	}
 }
 
-void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AWHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {	
 	checkf(InputConfigDataAsset,TEXT("Forgot to assign a valid data asset as input config"));
 
@@ -118,25 +118,25 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext,0);
 
-	UWarriorInputComponent* WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
+	UWInputComponent* WInputComponent = CastChecked<UWInputComponent>(PlayerInputComponent);
 
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset,WarriorGameplayTags::InputTag_Move,ETriggerEvent::Triggered,this,&ThisClass::Input_Move);
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset,WarriorGameplayTags::InputTag_Look,ETriggerEvent::Triggered,this,&ThisClass::Input_Look);
+	WInputComponent->BindNativeInputAction(InputConfigDataAsset,WGameplayTags::InputTag_Move,ETriggerEvent::Triggered,this,&ThisClass::Input_Move);
+	WInputComponent->BindNativeInputAction(InputConfigDataAsset,WGameplayTags::InputTag_Look,ETriggerEvent::Triggered,this,&ThisClass::Input_Look);
 
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset,WarriorGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Triggered,this,&ThisClass::Input_SwitchTargetTriggered);
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset,WarriorGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Completed,this,&ThisClass::Input_SwitchTargetCompleted);
+	WInputComponent->BindNativeInputAction(InputConfigDataAsset,WGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Triggered,this,&ThisClass::Input_SwitchTargetTriggered);
+	WInputComponent->BindNativeInputAction(InputConfigDataAsset,WGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Completed,this,&ThisClass::Input_SwitchTargetCompleted);
 
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset,WarriorGameplayTags::InputTag_PickUp_Stones,ETriggerEvent::Started,this,&ThisClass::Input_PickUpStonesStarted);
+	WInputComponent->BindNativeInputAction(InputConfigDataAsset,WGameplayTags::InputTag_PickUp_Stones,ETriggerEvent::Started,this,&ThisClass::Input_PickUpStonesStarted);
 
-	WarriorInputComponent->BindAbilityInputAction(InputConfigDataAsset,this,&ThisClass::Input_AbilityInputPressed,&ThisClass::Input_AbilityInputReleased);
+	WInputComponent->BindAbilityInputAction(InputConfigDataAsset,this,&ThisClass::Input_AbilityInputPressed,&ThisClass::Input_AbilityInputReleased);
 }
 
-void AWarriorHeroCharacter::BeginPlay()
+void AWHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
+void AWHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
 {	
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
 
@@ -157,7 +157,7 @@ void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue
 	}
 }
 
-void AWarriorHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
+void AWHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
 {
 	const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
 	
@@ -172,39 +172,39 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue& InputActionValue
 	}
 }
 
-void AWarriorHeroCharacter::Input_SwitchTargetTriggered(const FInputActionValue& InputActionValue)
+void AWHeroCharacter::Input_SwitchTargetTriggered(const FInputActionValue& InputActionValue)
 {
 	SwitchDirection = InputActionValue.Get<FVector2D>();
 }
 
-void AWarriorHeroCharacter::Input_SwitchTargetCompleted(const FInputActionValue& InputActionValue)
+void AWHeroCharacter::Input_SwitchTargetCompleted(const FInputActionValue& InputActionValue)
 {	
 	FGameplayEventData Data;
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		this,
-		SwitchDirection.X>0.f? WarriorGameplayTags::Player_Event_SwitchTarget_Right : WarriorGameplayTags::Player_Event_SwitchTarget_Left,
+		SwitchDirection.X>0.f? WGameplayTags::Player_Event_SwitchTarget_Right : WGameplayTags::Player_Event_SwitchTarget_Left,
 		Data
 	);
 }
 
-void AWarriorHeroCharacter::Input_PickUpStonesStarted(const FInputActionValue& InputActionValue)
+void AWHeroCharacter::Input_PickUpStonesStarted(const FInputActionValue& InputActionValue)
 {	
 	FGameplayEventData Data;
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		this,
-		WarriorGameplayTags::Player_Event_ConsumeStones,
+		WGameplayTags::Player_Event_ConsumeStones,
 		Data
 	);
 }
 
-void AWarriorHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+void AWHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
 {
-	WarriorAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
+	WAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
 }
 
-void AWarriorHeroCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+void AWHeroCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
 {
-	WarriorAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
+	WAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
 }

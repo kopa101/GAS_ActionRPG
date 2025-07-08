@@ -1,46 +1,46 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "GameModes/WarriorSurvialGameMode.h"
+#include "GameModes/WSurvialGameMode.h"
 #include "Engine/AssetManager.h"
-#include "Characters/WarriorEnemyCharacter.h"
+#include "Characters/WEnemyCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/TargetPoint.h"
 #include "NavigationSystem.h"
-#include "WarriorFunctionLibrary.h"
+#include "WFunctionLibrary.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
-void AWarriorSurvialGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
+void AWSurvialGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
 {
 	Super::InitGame(MapName,Options,ErrorMessage);
 
-	EWarriorGameDifficulty SavedGameDifficulty;
+	EWGameDifficulty SavedGameDifficulty;
 
-	if (UWarriorFunctionLibrary::TryLoadSavedGameDifficulty(SavedGameDifficulty))
+	if (UWFunctionLibrary::TryLoadSavedGameDifficulty(SavedGameDifficulty))
 	{
 		CurrentGameDifficulty = SavedGameDifficulty;
 	}
 }
 
-void AWarriorSurvialGameMode::BeginPlay()
+void AWSurvialGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
 	checkf(EnemyWaveSpawnerDataTable,TEXT("Forgot to assign a valid datat table in survial game mode blueprint"));
 
-	SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::WaitSpawnNewWave);
+	SetCurrentSurvialGameModeState(EWSurvialGameModeState::WaitSpawnNewWave);
 	
 	TotalWavesToSpawn = EnemyWaveSpawnerDataTable->GetRowNames().Num();
 
 	PreLoadNextWaveEnemies();
 }
 
-void AWarriorSurvialGameMode::Tick(float DeltaTime)
+void AWSurvialGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (CurrentSurvialGameModeState == EWarriorSurvialGameModeState::WaitSpawnNewWave)
+	if (CurrentSurvialGameModeState == EWSurvialGameModeState::WaitSpawnNewWave)
 	{
 		TimePassedSinceStart += DeltaTime;
 
@@ -48,11 +48,11 @@ void AWarriorSurvialGameMode::Tick(float DeltaTime)
 		{
 			TimePassedSinceStart = 0.f;
 
-			SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::SpawningNewWave);
+			SetCurrentSurvialGameModeState(EWSurvialGameModeState::SpawningNewWave);
 		}
 	}
 
-	if (CurrentSurvialGameModeState == EWarriorSurvialGameModeState::SpawningNewWave)
+	if (CurrentSurvialGameModeState == EWSurvialGameModeState::SpawningNewWave)
 	{
 		TimePassedSinceStart += DeltaTime;
 
@@ -62,11 +62,11 @@ void AWarriorSurvialGameMode::Tick(float DeltaTime)
 
 			TimePassedSinceStart = 0.f;
 
-			SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::InProgress);
+			SetCurrentSurvialGameModeState(EWSurvialGameModeState::InProgress);
 		}
 	}
 
-	if (CurrentSurvialGameModeState == EWarriorSurvialGameModeState::WaveCompleted)
+	if (CurrentSurvialGameModeState == EWSurvialGameModeState::WaveCompleted)
 	{
 		TimePassedSinceStart += DeltaTime;
 
@@ -78,30 +78,30 @@ void AWarriorSurvialGameMode::Tick(float DeltaTime)
 
 			if (HasFinishedAllWaves())
 			{
-				SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::AllWavesDone);
+				SetCurrentSurvialGameModeState(EWSurvialGameModeState::AllWavesDone);
 			}
 			else
 			{
-				SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::WaitSpawnNewWave);
+				SetCurrentSurvialGameModeState(EWSurvialGameModeState::WaitSpawnNewWave);
 				PreLoadNextWaveEnemies();
 			}
 		}
 	}
 }
 
-void AWarriorSurvialGameMode::SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState InState)
+void AWSurvialGameMode::SetCurrentSurvialGameModeState(EWSurvialGameModeState InState)
 {
 	CurrentSurvialGameModeState = InState;
 
 	OnSurvialGameModeStateChanged.Broadcast(CurrentSurvialGameModeState);
 }
 
-bool AWarriorSurvialGameMode::HasFinishedAllWaves() const
+bool AWSurvialGameMode::HasFinishedAllWaves() const
 {
 	return CurrentWaveCount>TotalWavesToSpawn;
 }
 
-void AWarriorSurvialGameMode::PreLoadNextWaveEnemies()
+void AWSurvialGameMode::PreLoadNextWaveEnemies()
 {
 	if (HasFinishedAllWaves())
 	{
@@ -110,7 +110,7 @@ void AWarriorSurvialGameMode::PreLoadNextWaveEnemies()
 
 	PreLoadedEnemyClassMap.Empty();
 
-	for (const FWarriorEnemyWaveSpawnerInfo& SpawnerInfo : GetCurrentWaveSpawnerTableRow()->EnemyWaveSpawnerDefinitions)
+	for (const FWEnemyWaveSpawnerInfo& SpawnerInfo : GetCurrentWaveSpawnerTableRow()->EnemyWaveSpawnerDefinitions)
 	{
 		if(SpawnerInfo.SoftEnemyClassToSpawn.IsNull()) continue;
 
@@ -129,18 +129,18 @@ void AWarriorSurvialGameMode::PreLoadNextWaveEnemies()
 	}
 }
 
-FWarriorEnemyWaveSpawnerTableRow* AWarriorSurvialGameMode::GetCurrentWaveSpawnerTableRow() const
+FWEnemyWaveSpawnerTableRow* AWSurvialGameMode::GetCurrentWaveSpawnerTableRow() const
 {
 	const FName RowName = FName(TEXT("Wave") + FString::FromInt(CurrentWaveCount));
 
-	FWarriorEnemyWaveSpawnerTableRow* FoundRow = EnemyWaveSpawnerDataTable->FindRow<FWarriorEnemyWaveSpawnerTableRow>(RowName,FString());
+	FWEnemyWaveSpawnerTableRow* FoundRow = EnemyWaveSpawnerDataTable->FindRow<FWEnemyWaveSpawnerTableRow>(RowName,FString());
 	
 	checkf(FoundRow,TEXT("Could not find a valid row under the name %s in the data table"),*RowName.ToString());
 
 	return FoundRow;
 }
 
-int32 AWarriorSurvialGameMode::TrySpawnWaveEnemies()
+int32 AWSurvialGameMode::TrySpawnWaveEnemies()
 {	
 	if (TargetPointsArray.IsEmpty())
 	{
@@ -154,7 +154,7 @@ int32 AWarriorSurvialGameMode::TrySpawnWaveEnemies()
 	FActorSpawnParameters SpawnParam;
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-	for (const FWarriorEnemyWaveSpawnerInfo& SpawnerInfo : GetCurrentWaveSpawnerTableRow()->EnemyWaveSpawnerDefinitions)
+	for (const FWEnemyWaveSpawnerInfo& SpawnerInfo : GetCurrentWaveSpawnerTableRow()->EnemyWaveSpawnerDefinitions)
 	{
 		if(SpawnerInfo.SoftEnemyClassToSpawn.IsNull()) continue;
 
@@ -173,7 +173,7 @@ int32 AWarriorSurvialGameMode::TrySpawnWaveEnemies()
 
 			RandomLocation += FVector(0.f,0.f,150.f);
 
-			AWarriorEnemyCharacter* SpawnedEnemy = GetWorld()->SpawnActor<AWarriorEnemyCharacter>(LoadedEnemyClass,RandomLocation,SpawnRotation,SpawnParam);
+			AWEnemyCharacter* SpawnedEnemy = GetWorld()->SpawnActor<AWEnemyCharacter>(LoadedEnemyClass,RandomLocation,SpawnRotation,SpawnParam);
 
 			if (SpawnedEnemy)
 			{	
@@ -194,12 +194,12 @@ int32 AWarriorSurvialGameMode::TrySpawnWaveEnemies()
 	
 }
 
-bool AWarriorSurvialGameMode::ShouldKeepSpawnEnemies() const
+bool AWSurvialGameMode::ShouldKeepSpawnEnemies() const
 {
 	return TotalSpawnedEnemiesThisWaveCounter < GetCurrentWaveSpawnerTableRow()->TotalEnemyToSpawnThisWave;
 }
 
-void AWarriorSurvialGameMode::OnEnemyDestroyed(AActor* DestroyedActor)
+void AWSurvialGameMode::OnEnemyDestroyed(AActor* DestroyedActor)
 {
 	CurrentSpawnedEnemiesCounter--;
 
@@ -212,13 +212,13 @@ void AWarriorSurvialGameMode::OnEnemyDestroyed(AActor* DestroyedActor)
 		TotalSpawnedEnemiesThisWaveCounter = 0;
 		CurrentSpawnedEnemiesCounter = 0;
 
-		SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState::WaveCompleted);
+		SetCurrentSurvialGameModeState(EWSurvialGameModeState::WaveCompleted);
 	}
 }
 
-void AWarriorSurvialGameMode::RegisterSpawnedEnemies(const TArray<AWarriorEnemyCharacter*>& InEnemiesToRegister)
+void AWSurvialGameMode::RegisterSpawnedEnemies(const TArray<AWEnemyCharacter*>& InEnemiesToRegister)
 {
-	for (AWarriorEnemyCharacter* SpawnedEnemy : InEnemiesToRegister)
+	for (AWEnemyCharacter* SpawnedEnemy : InEnemiesToRegister)
 	{
 		if (SpawnedEnemy)
 		{

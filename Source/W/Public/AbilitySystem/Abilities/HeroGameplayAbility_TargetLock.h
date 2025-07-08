@@ -3,16 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "AbilitySystem/Abilities/WHeroGameplayAbility.h"
 #include "HeroGameplayAbility_TargetLock.generated.h"
 
-class UWarriorWidgetBase;
+class UWWidgetBase;
 class UInputMappingContext;
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API UHeroGameplayAbility_TargetLock : public UWarriorHeroGameplayAbility
+class W_API UHeroGameplayAbility_TargetLock : public UWHeroGameplayAbility
 {
 	GENERATED_BODY()
 	
@@ -56,7 +56,7 @@ private:
 	bool bShowPersistentDebugShape = false;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
-	TSubclassOf<UWarriorWidgetBase> TargetLockWidgetClass;
+	TSubclassOf<UWWidgetBase> TargetLockWidgetClass;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float TargetLockRotationInterpSpeed = 5.f;
@@ -77,7 +77,7 @@ private:
 	AActor* CurrentLockedActor;
 
 	UPROPERTY()
-	UWarriorWidgetBase* DrawnTargetLockWidget;
+	UWWidgetBase* DrawnTargetLockWidget;
 
 	UPROPERTY()
 	FVector2D TargetLockWidgetSize = FVector2D::ZeroVector;

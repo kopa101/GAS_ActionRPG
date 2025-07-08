@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
 #include "GameplayTagContainer.h"
-#include "WarriorBaseAnimInstance.generated.h"
+#include "WBaseAnimInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorBaseAnimInstance : public UAnimInstance
+class W_API UWBaseAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 	

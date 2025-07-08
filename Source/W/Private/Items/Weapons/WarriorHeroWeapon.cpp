@@ -1,14 +1,14 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Items/Weapons/WarriorHeroWeapon.h"
+#include "Items/Weapons/WHeroWeapon.h"
 
-void AWarriorHeroWeapon::AssignGrantedAbilitySpecHandles(const TArray<FGameplayAbilitySpecHandle>& InSpecHandles)
+void AWHeroWeapon::AssignGrantedAbilitySpecHandles(const TArray<FGameplayAbilitySpecHandle>& InSpecHandles)
 {
 	GrantedAbilitySpecHandles = InSpecHandles;
 }
 
-TArray<FGameplayAbilitySpecHandle> AWarriorHeroWeapon::GetGrantedAbilitySpecHandles() const
+TArray<FGameplayAbilitySpecHandle> AWHeroWeapon::GetGrantedAbilitySpecHandles() const
 {
 	return GrantedAbilitySpecHandles;
 }

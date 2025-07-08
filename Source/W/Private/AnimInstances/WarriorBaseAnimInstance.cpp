@@ -1,14 +1,14 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AnimInstances/WarriorBaseAnimInstance.h"
-#include "WarriorFunctionLibrary.h"
+#include "AnimInstances/WBaseAnimInstance.h"
+#include "WFunctionLibrary.h"
 
-bool UWarriorBaseAnimInstance::DoesOwnerHaveTag(FGameplayTag TagToCheck) const
+bool UWBaseAnimInstance::DoesOwnerHaveTag(FGameplayTag TagToCheck) const
 {
 	if (APawn* OwningPawn = TryGetPawnOwner())
 	{
-		return UWarriorFunctionLibrary::NativeDoesActorHaveTag(OwningPawn,TagToCheck);
+		return UWFunctionLibrary::NativeDoesActorHaveTag(OwningPawn,TagToCheck);
 	}
 
 	return false;

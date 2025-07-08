@@ -3,12 +3,12 @@
 
 #include "Components/Combat/EnemyCombatComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "WarriorGameplayTags.h"
-#include "WarriorFunctionLibrary.h"
-#include "Characters/WarriorEnemyCharacter.h"
+#include "WGameplayTags.h"
+#include "WFunctionLibrary.h"
+#include "Characters/WEnemyCharacter.h"
 #include "Components/BoxComponent.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
 void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 {
@@ -21,12 +21,12 @@ void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 
 	bool bIsValidBlock = false;
 
-	const bool bIsPlayerBlocking = UWarriorFunctionLibrary::NativeDoesActorHaveTag(HitActor,WarriorGameplayTags::Player_Status_Blocking);
-	const bool bIsMyAttackUnblockable = UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetOwningPawn(),WarriorGameplayTags::Enemy_Status_Unbloackable);
+	const bool bIsPlayerBlocking = UWFunctionLibrary::NativeDoesActorHaveTag(HitActor,WGameplayTags::Player_Status_Blocking);
+	const bool bIsMyAttackUnblockable = UWFunctionLibrary::NativeDoesActorHaveTag(GetOwningPawn(),WGameplayTags::Enemy_Status_Unbloackable);
 
 	if (bIsPlayerBlocking && !bIsMyAttackUnblockable)
 	{
-		bIsValidBlock = UWarriorFunctionLibrary::IsValidBlock(GetOwningPawn(),HitActor);
+		bIsValidBlock = UWFunctionLibrary::IsValidBlock(GetOwningPawn(),HitActor);
 	}
 
 	FGameplayEventData EventData;
@@ -37,7 +37,7 @@ void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 	{
 		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 			HitActor,
-			WarriorGameplayTags::Player_Event_SuccessfulBlock,
+			WGameplayTags::Player_Event_SuccessfulBlock,
 			EventData
 		);
 	}
@@ -45,7 +45,7 @@ void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 	{
 		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 			GetOwningPawn(),
-			WarriorGameplayTags::Shared_Event_MeleeHit,
+			WGameplayTags::Shared_Event_MeleeHit,
 			EventData
 		);
 	}
@@ -53,7 +53,7 @@ void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 
 void UEnemyCombatComponent::ToggleBodyCollsionBoxCollision(bool bShouldEnable, EToggleDamageType ToggleDamageType)
 {
-	AWarriorEnemyCharacter* OwningEnemyCharacter = GetOwningPawn<AWarriorEnemyCharacter>();
+	AWEnemyCharacter* OwningEnemyCharacter = GetOwningPawn<AWEnemyCharacter>();
 
 	check(OwningEnemyCharacter);
 

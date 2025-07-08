@@ -11,7 +11,7 @@ class UInputAction;
 class UInputMappingContext;
 
 USTRUCT(BlueprintType)
-struct FWarriorInputActionConfig
+struct FWInputActionConfig
 {
 	GENERATED_BODY()
 
@@ -31,7 +31,7 @@ public:
  * 
  */
 UCLASS()
-class WARRIOR_API UDataAsset_InputConfig : public UDataAsset
+class W_API UDataAsset_InputConfig : public UDataAsset
 {
 	GENERATED_BODY()
 
@@ -40,10 +40,10 @@ public:
 	UInputMappingContext* DefaultMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
-	TArray<FWarriorInputActionConfig> NativeInputActions;
+	TArray<FWInputActionConfig> NativeInputActions;
 	 
 	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
-	TArray<FWarriorInputActionConfig> AbilityInputActions;
+	TArray<FWInputActionConfig> AbilityInputActions;
 };

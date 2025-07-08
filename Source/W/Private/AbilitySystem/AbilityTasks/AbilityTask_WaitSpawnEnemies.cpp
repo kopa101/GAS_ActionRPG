@@ -5,11 +5,11 @@
 #include "AbilitySystemComponent.h"
 #include "Engine/AssetManager.h"
 #include "NavigationSystem.h"
-#include "Characters/WarriorEnemyCharacter.h"
+#include "Characters/WEnemyCharacter.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
-UAbilityTask_WaitSpawnEnemies* UAbilityTask_WaitSpawnEnemies::WaitSpawnEnemies(UGameplayAbility* OwningAbility, FGameplayTag EventTag, TSoftClassPtr<AWarriorEnemyCharacter> SoftEnemyClassToSpawn, int32 NumToSpawn, const FVector& SpawnOrigin, float RandomSpawnRadius)
+UAbilityTask_WaitSpawnEnemies* UAbilityTask_WaitSpawnEnemies::WaitSpawnEnemies(UGameplayAbility* OwningAbility, FGameplayTag EventTag, TSoftClassPtr<AWEnemyCharacter> SoftEnemyClassToSpawn, int32 NumToSpawn, const FVector& SpawnOrigin, float RandomSpawnRadius)
 {
     UAbilityTask_WaitSpawnEnemies* Node = NewAbilityTask<UAbilityTask_WaitSpawnEnemies>(OwningAbility);
     Node->CachedEventTag = EventTag;
@@ -51,7 +51,7 @@ void UAbilityTask_WaitSpawnEnemies::OnGameplayEventReceived(const FGameplayEvent
     {
         if (ShouldBroadcastAbilityTaskDelegates())
         {
-            DidNotSpawn.Broadcast(TArray<AWarriorEnemyCharacter*>());
+            DidNotSpawn.Broadcast(TArray<AWEnemyCharacter*>());
         }
 
         EndTask();
@@ -68,7 +68,7 @@ void UAbilityTask_WaitSpawnEnemies::OnEnemyClassLoaded()
     {
 		if (ShouldBroadcastAbilityTaskDelegates())
 		{
-			DidNotSpawn.Broadcast(TArray<AWarriorEnemyCharacter*>());
+			DidNotSpawn.Broadcast(TArray<AWEnemyCharacter*>());
 		}
 
         EndTask();
@@ -76,7 +76,7 @@ void UAbilityTask_WaitSpawnEnemies::OnEnemyClassLoaded()
         return;
     }
 
-    TArray<AWarriorEnemyCharacter*> SpawnedEnemies;
+    TArray<AWEnemyCharacter*> SpawnedEnemies;
 
     FActorSpawnParameters SpawnParam;
     SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -90,7 +90,7 @@ void UAbilityTask_WaitSpawnEnemies::OnEnemyClassLoaded()
 
         const FRotator SpawnFacingRotation = AbilitySystemComponent->GetAvatarActor()->GetActorForwardVector().ToOrientationRotator();
 
-        AWarriorEnemyCharacter* SpawnedEnemy = World->SpawnActor<AWarriorEnemyCharacter>(LoadedClass,RandomLocation,SpawnFacingRotation,SpawnParam);
+        AWEnemyCharacter* SpawnedEnemy = World->SpawnActor<AWEnemyCharacter>(LoadedClass,RandomLocation,SpawnFacingRotation,SpawnParam);
 
         if (SpawnedEnemy)
         {
@@ -106,7 +106,7 @@ void UAbilityTask_WaitSpawnEnemies::OnEnemyClassLoaded()
         }
         else
         {
-            DidNotSpawn.Broadcast(TArray<AWarriorEnemyCharacter*>());
+            DidNotSpawn.Broadcast(TArray<AWEnemyCharacter*>());
         }
     }
 

@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Characters/WarriorBaseCharacter.h"
+#include "Characters/WBaseCharacter.h"
 #include "GameplayTagContainer.h"
-#include "WarriorHeroCharacter.generated.h"
+#include "WHeroCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -17,12 +17,12 @@ class UHeroUIComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
+class W_API AWHeroCharacter : public AWBaseCharacter
 {
 	GENERATED_BODY()
 
 public:
-	AWarriorHeroCharacter();
+	AWHeroCharacter();
 	
 	//~ Begin IPawnCombatInterface Interface.
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;

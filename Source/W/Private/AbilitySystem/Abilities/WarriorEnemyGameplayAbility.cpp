@@ -1,43 +1,43 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AbilitySystem/Abilities/WarriorEnemyGameplayAbility.h"
-#include "Characters/WarriorEnemyCharacter.h"
-#include "AbilitySystem/WarriorAbilitySystemComponent.h"
-#include "WarriorGameplayTags.h"
+#include "AbilitySystem/Abilities/WEnemyGameplayAbility.h"
+#include "Characters/WEnemyCharacter.h"
+#include "AbilitySystem/WAbilitySystemComponent.h"
+#include "WGameplayTags.h"
 
-AWarriorEnemyCharacter* UWarriorEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
+AWEnemyCharacter* UWEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
 {   
-	if (!CachedWarriorEnemyCharacter.IsValid())
+	if (!CachedWEnemyCharacter.IsValid())
 	{
-		CachedWarriorEnemyCharacter = Cast<AWarriorEnemyCharacter>(CurrentActorInfo->AvatarActor);
+		CachedWEnemyCharacter = Cast<AWEnemyCharacter>(CurrentActorInfo->AvatarActor);
 	}
 
-    return CachedWarriorEnemyCharacter.IsValid()? CachedWarriorEnemyCharacter.Get() : nullptr;
+    return CachedWEnemyCharacter.IsValid()? CachedWEnemyCharacter.Get() : nullptr;
 }
 
-UEnemyCombatComponent* UWarriorEnemyGameplayAbility::GetEnemyCombatComponentFromActorInfo()
+UEnemyCombatComponent* UWEnemyGameplayAbility::GetEnemyCombatComponentFromActorInfo()
 {
     return GetEnemyCharacterFromActorInfo()->GetEnemyCombatComponent();
 }
 
-FGameplayEffectSpecHandle UWarriorEnemyGameplayAbility::MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, const FScalableFloat& InDamageScalableFloat)
+FGameplayEffectSpecHandle UWEnemyGameplayAbility::MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, const FScalableFloat& InDamageScalableFloat)
 {
 	check(EffectClass);
 
-	FGameplayEffectContextHandle ContextHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeEffectContext();
+	FGameplayEffectContextHandle ContextHandle = GetWAbilitySystemComponentFromActorInfo()->MakeEffectContext();
 	ContextHandle.SetAbility(this);
 	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
 	ContextHandle.AddInstigator(GetAvatarActorFromActorInfo(),GetAvatarActorFromActorInfo());
 
-	FGameplayEffectSpecHandle EffectSpecHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(
+	FGameplayEffectSpecHandle EffectSpecHandle = GetWAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(
 		EffectClass,
 		GetAbilityLevel(),
 		ContextHandle
 	);
 
 	EffectSpecHandle.Data->SetSetByCallerMagnitude(
-		WarriorGameplayTags::Shared_SetByCaller_BaseDamage,
+		WGameplayTags::Shared_SetByCaller_BaseDamage,
 		InDamageScalableFloat.GetValueAtLevel(GetAbilityLevel())
 	);
 

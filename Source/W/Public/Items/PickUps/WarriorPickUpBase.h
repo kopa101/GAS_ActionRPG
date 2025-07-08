@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "WarriorPickUpBase.generated.h"
+#include "WPickUpBase.generated.h"
 
 class USphereComponent;
 
 UCLASS()
-class WARRIOR_API AWarriorPickUpBase : public AActor
+class W_API AWPickUpBase : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	AWarriorPickUpBase();
+	AWPickUpBase();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pick UP Interaction")

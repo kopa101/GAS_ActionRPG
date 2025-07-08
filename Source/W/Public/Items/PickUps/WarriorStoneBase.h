@@ -3,22 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Items/PickUps/WarriorPickUpBase.h"
-#include "WarriorStoneBase.generated.h"
+#include "Items/PickUps/WPickUpBase.h"
+#include "WStoneBase.generated.h"
 
-class UWarriorAbilitySystemComponent;
+class UWAbilitySystemComponent;
 class UGameplayEffect;
 
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorStoneBase : public AWarriorPickUpBase
+class W_API AWStoneBase : public AWPickUpBase
 {
 	GENERATED_BODY()
 
 public:
-	void Consume(UWarriorAbilitySystemComponent* AbilitySystemComponent,int32 ApplyLevel);
+	void Consume(UWAbilitySystemComponent* AbilitySystemComponent,int32 ApplyLevel);
 
 protected:
 	virtual void OnPickUpCollisionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;

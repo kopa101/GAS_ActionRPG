@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameplayEffectTypes.h"
-#include "WarriorProjectileBase.generated.h"
+#include "WProjectileBase.generated.h"
 
 class UBoxComponent;
 class UNiagaraComponent;
@@ -20,12 +20,12 @@ enum class EProjectileDamagePolicy : uint8
 };
 
 UCLASS()
-class WARRIOR_API AWarriorProjectileBase : public AActor
+class W_API AWProjectileBase : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	AWarriorProjectileBase();
+	AWProjectileBase();
 
 protected:
 	virtual void BeginPlay() override;

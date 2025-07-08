@@ -3,22 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Items/Weapons/WarriorWeaponBase.h"
-#include "WarriorTypes/WarriorStructTypes.h"
+#include "Items/Weapons/WWeaponBase.h"
+#include "WTypes/WStructTypes.h"
 #include "GameplayAbilitySpecHandle.h"
-#include "WarriorHeroWeapon.generated.h"
+#include "WHeroWeapon.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroWeapon : public AWarriorWeaponBase
+class W_API AWHeroWeapon : public AWWeaponBase
 {
 	GENERATED_BODY()
 	
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeaponData")
-	FWarriorHeroWeaponData HeroWeaponData;
+	FWHeroWeaponData HeroWeaponData;
 
 	UFUNCTION(BlueprintCallable)
 	void AssignGrantedAbilitySpecHandles(const TArray<FGameplayAbilitySpecHandle>& InSpecHandles);

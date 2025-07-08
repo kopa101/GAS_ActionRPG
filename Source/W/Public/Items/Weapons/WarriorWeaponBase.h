@@ -4,20 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "WarriorWeaponBase.generated.h"
+#include "WWeaponBase.generated.h"
 
 class UBoxComponent;
 
 DECLARE_DELEGATE_OneParam(FOnTargetInteractedDelegate,AActor*)
 
 UCLASS()
-class WARRIOR_API AWarriorWeaponBase : public AActor
+class W_API AWWeaponBase : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AWarriorWeaponBase();
+	AWWeaponBase();
 
 	FOnTargetInteractedDelegate OnWeaponHitTarget;
 	FOnTargetInteractedDelegate OnWeaponPulledFromTarget;

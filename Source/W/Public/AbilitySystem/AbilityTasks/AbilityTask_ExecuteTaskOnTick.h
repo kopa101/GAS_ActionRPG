@@ -12,14 +12,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityTaskTickDelegate,float,Del
  * 
  */
 UCLASS()
-class WARRIOR_API UAbilityTask_ExecuteTaskOnTick : public UAbilityTask
+class W_API UAbilityTask_ExecuteTaskOnTick : public UAbilityTask
 {
 	GENERATED_BODY()
 	
 public:
 	UAbilityTask_ExecuteTaskOnTick();
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|AbilityTasks", meta = (HidePin = "OwningAbility",DefaultToSelf = "OwningAbility",BlueprintInternalUseOnly = "true"))
+	UFUNCTION(BlueprintCallable, Category = "W|AbilityTasks", meta = (HidePin = "OwningAbility",DefaultToSelf = "OwningAbility",BlueprintInternalUseOnly = "true"))
 	static UAbilityTask_ExecuteTaskOnTick* ExecuteTaskOnTick(UGameplayAbility* OwningAbility);
 
 	//~ Begin UGameplayTask Interface

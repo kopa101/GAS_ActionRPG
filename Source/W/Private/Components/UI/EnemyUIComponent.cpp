@@ -2,9 +2,9 @@
 
 
 #include "Components/UI/EnemyUIComponent.h"
-#include "Widgets/WarriorWidgetBase.h"
+#include "Widgets/WWidgetBase.h"
 
-void UEnemyUIComponent::RegisterEnemyDrawnWidget(UWarriorWidgetBase* InWidgetToRegister)
+void UEnemyUIComponent::RegisterEnemyDrawnWidget(UWWidgetBase* InWidgetToRegister)
 {
 	EnemyDrawnWidgets.Add(InWidgetToRegister);
 }
@@ -16,7 +16,7 @@ void UEnemyUIComponent::RemoveEnemyDrawnWidgetsIfAny()
 		return;
 	}
 
-	for (UWarriorWidgetBase* DrawnWidget : EnemyDrawnWidgets)
+	for (UWWidgetBase* DrawnWidget : EnemyDrawnWidgets)
 	{
 		if (DrawnWidget)
 		{

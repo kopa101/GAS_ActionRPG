@@ -3,8 +3,8 @@
 
 #include "AbilitySystem/Abilities/HeroGameplayAbility_PickUpStones.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Characters/WarriorHeroCharacter.h"
-#include "Items/PickUps/WarriorStoneBase.h"
+#include "Characters/WHeroCharacter.h"
+#include "Items/PickUps/WStoneBase.h"
 #include "Components/UI/HeroUIComponent.h"
 
 void UHeroGameplayAbility_PickUpStones::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
@@ -43,7 +43,7 @@ void UHeroGameplayAbility_PickUpStones::CollectStones()
 
 	for (const FHitResult& TraceHit : TraceHits)
 	{
-		if (AWarriorStoneBase* FoundStone = Cast<AWarriorStoneBase>(TraceHit.GetActor()))
+		if (AWStoneBase* FoundStone = Cast<AWStoneBase>(TraceHit.GetActor()))
 		{
 			CollectedStones.AddUnique(FoundStone);
 		}
@@ -63,11 +63,11 @@ void UHeroGameplayAbility_PickUpStones::ConsumeStones()
 		return;
 	}
 
-	for (AWarriorStoneBase* CollectedStone : CollectedStones)
+	for (AWStoneBase* CollectedStone : CollectedStones)
 	{
 		if (CollectedStone)
 		{
-			CollectedStone->Consume(GetWarriorAbilitySystemComponentFromActorInfo(),GetAbilityLevel());
+			CollectedStone->Consume(GetWAbilitySystemComponentFromActorInfo(),GetAbilityLevel());
 		}
 	}
 }

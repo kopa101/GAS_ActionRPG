@@ -1,10 +1,10 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "WarriorTypes/WarriorStructTypes.h"
-#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "WTypes/WStructTypes.h"
+#include "AbilitySystem/Abilities/WHeroGameplayAbility.h"
 
-bool FWarriorHeroAbilitySet::IsValid() const
+bool FWHeroAbilitySet::IsValid() const
 {
 	return InputTag.IsValid() && AbilityToGrant;
 }

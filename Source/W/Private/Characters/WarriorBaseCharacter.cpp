@@ -1,13 +1,13 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Characters/WarriorBaseCharacter.h"
-#include "AbilitySystem/WarriorAbilitySystemComponent.h"
-#include "AbilitySystem/WarriorAttributeSet.h"
+#include "Characters/WBaseCharacter.h"
+#include "AbilitySystem/WAbilitySystemComponent.h"
+#include "AbilitySystem/WAttributeSet.h"
 #include "MotionWarpingComponent.h"
 
 // Sets default values
-AWarriorBaseCharacter::AWarriorBaseCharacter()
+AWBaseCharacter::AWBaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -15,35 +15,35 @@ AWarriorBaseCharacter::AWarriorBaseCharacter()
 
 	GetMesh()->bReceivesDecals = false;
 
-	WarriorAbilitySystemComponent = CreateDefaultSubobject<UWarriorAbilitySystemComponent>(TEXT("WarriorAbilitySystemComponent"));
+	WAbilitySystemComponent = CreateDefaultSubobject<UWAbilitySystemComponent>(TEXT("WAbilitySystemComponent"));
 
-	WarriorAttributeSet = CreateDefaultSubobject<UWarriorAttributeSet>(TEXT("WarriorAttributeSet"));
+	WAttributeSet = CreateDefaultSubobject<UWAttributeSet>(TEXT("WAttributeSet"));
 
 	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("MotionWarpingComponent"));
 }
 
-UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
+UAbilitySystemComponent* AWBaseCharacter::GetAbilitySystemComponent() const
 {
-	return GetWarriorAbilitySystemComponent();
+	return GetWAbilitySystemComponent();
 }
 
-UPawnCombatComponent* AWarriorBaseCharacter::GetPawnCombatComponent() const
-{
-	return nullptr;
-}
-
-UPawnUIComponent* AWarriorBaseCharacter::GetPawnUIComponent() const
+UPawnCombatComponent* AWBaseCharacter::GetPawnCombatComponent() const
 {
 	return nullptr;
 }
 
-void AWarriorBaseCharacter::PossessedBy(AController* NewController)
+UPawnUIComponent* AWBaseCharacter::GetPawnUIComponent() const
+{
+	return nullptr;
+}
+
+void AWBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (WarriorAbilitySystemComponent)
+	if (WAbilitySystemComponent)
 	{ 
-		WarriorAbilitySystemComponent->InitAbilityActorInfo(this,this);
+		WAbilitySystemComponent->InitAbilityActorInfo(this,this);
 
 		ensureMsgf(!CharacterStartUpData.IsNull(),TEXT("Forgot to assign start up data to %s"),*GetName());
 	}

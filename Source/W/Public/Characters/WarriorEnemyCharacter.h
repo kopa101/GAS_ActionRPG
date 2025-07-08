@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Characters/WarriorBaseCharacter.h"
-#include "WarriorEnemyCharacter.generated.h"
+#include "Characters/WBaseCharacter.h"
+#include "WEnemyCharacter.generated.h"
 
 class UEnemyCombatComponent;
 class UEnemyUIComponent;
@@ -14,12 +14,12 @@ class UBoxComponent;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
+class W_API AWEnemyCharacter : public AWBaseCharacter
 {
 	GENERATED_BODY()
 	
 public:
-	AWarriorEnemyCharacter();
+	AWEnemyCharacter();
 
 	//~ Begin IPawnCombatInterface Interface.
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;

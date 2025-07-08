@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "EnhancedInputComponent.h"
 #include "DataAssets/Input/DataAsset_InputConfig.h"
-#include "WarriorInputComponent.generated.h"
+#include "WInputComponent.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API UWarriorInputComponent : public UEnhancedInputComponent
+class W_API UWInputComponent : public UEnhancedInputComponent
 {
 	GENERATED_BODY()
 	
@@ -24,7 +24,7 @@ public:
 };
 
 template<class UserObject, typename CallbackFunc>
-inline void UWarriorInputComponent::BindNativeInputAction(const UDataAsset_InputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
+inline void UWInputComponent::BindNativeInputAction(const UDataAsset_InputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
 {
 	checkf(InInputConfig,TEXT("Input config data asset is null,can not proceed with binding"));
 
@@ -35,11 +35,11 @@ inline void UWarriorInputComponent::BindNativeInputAction(const UDataAsset_Input
 }
 
 template<class UserObject, typename CallbackFunc>
-inline void UWarriorInputComponent::BindAbilityInputAction(const UDataAsset_InputConfig* InInputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputRelasedFunc)
+inline void UWInputComponent::BindAbilityInputAction(const UDataAsset_InputConfig* InInputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputRelasedFunc)
 {
 	checkf(InInputConfig,TEXT("Input config data asset is null,can not proceed with binding"));
 
-	for (const FWarriorInputActionConfig& AbilityInputActionConfig : InInputConfig->AbilityInputActions)
+	for (const FWInputActionConfig& AbilityInputActionConfig : InInputConfig->AbilityInputActions)
 	{
 		if(!AbilityInputActionConfig.IsValid()) continue;
 

@@ -1,18 +1,18 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
-#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/WGameplayAbility.h"
+#include "AbilitySystem/WAbilitySystemComponent.h"
 #include "Components/Combat/PawnCombatComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "WarriorFunctionLibrary.h"
-#include "WarriorGameplayTags.h"
+#include "WFunctionLibrary.h"
+#include "WGameplayTags.h"
 
-void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+void UWGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
 {
 	Super::OnGiveAbility(ActorInfo, Spec);
 
-	if (AbilityActivationPolicy == EWarriorAbilityActivationPolicy::OnGiven)
+	if (AbilityActivationPolicy == EWAbilityActivationPolicy::OnGiven)
 	{
 		if (ActorInfo && !Spec.IsActive())
 		{
@@ -21,11 +21,11 @@ void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* Act
 	}
 }
 
-void UWarriorGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
+void UWGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 
-	if (AbilityActivationPolicy == EWarriorAbilityActivationPolicy::OnGiven)
+	if (AbilityActivationPolicy == EWAbilityActivationPolicy::OnGiven)
 	{
 		if (ActorInfo)
 		{
@@ -34,38 +34,38 @@ void UWarriorGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle
 	}
 }
 
-UPawnCombatComponent* UWarriorGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+UPawnCombatComponent* UWGameplayAbility::GetPawnCombatComponentFromActorInfo() const
 {	
 	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 }
 
-UWarriorAbilitySystemComponent* UWarriorGameplayAbility::GetWarriorAbilitySystemComponentFromActorInfo() const
+UWAbilitySystemComponent* UWGameplayAbility::GetWAbilitySystemComponentFromActorInfo() const
 {	
-	return Cast<UWarriorAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+	return Cast<UWAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
 }
 
-FActiveGameplayEffectHandle UWarriorGameplayAbility::NativeApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle)
+FActiveGameplayEffectHandle UWGameplayAbility::NativeApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle)
 {	
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 
 	check(TargetASC && InSpecHandle.IsValid());
 
-	return GetWarriorAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(
+	return GetWAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(
 		*InSpecHandle.Data,
 		TargetASC
 	);
 }
 
-FActiveGameplayEffectHandle UWarriorGameplayAbility::BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EWarriorSuccessType& OutSuccessType)
+FActiveGameplayEffectHandle UWGameplayAbility::BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EWSuccessType& OutSuccessType)
 {
 	FActiveGameplayEffectHandle ActiveGameplayEffectHandle = NativeApplyEffectSpecHandleToTarget(TargetActor,InSpecHandle);
 
-	OutSuccessType = ActiveGameplayEffectHandle.WasSuccessfullyApplied()? EWarriorSuccessType::Successful : EWarriorSuccessType::Failed;
+	OutSuccessType = ActiveGameplayEffectHandle.WasSuccessfullyApplied()? EWSuccessType::Successful : EWSuccessType::Failed;
 	 
 	return ActiveGameplayEffectHandle;
 }
 
-void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle, const TArray<FHitResult>& InHitResults)
+void UWGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle, const TArray<FHitResult>& InHitResults)
 {
 	if (InHitResults.IsEmpty())
 	{
@@ -78,7 +78,7 @@ void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FG
 	{
 		if (APawn* HitPawn = Cast<APawn>(Hit.GetActor()))
 		{
-			if (UWarriorFunctionLibrary::IsTargetPawnHostile(OwningPawn, HitPawn))
+			if (UWFunctionLibrary::IsTargetPawnHostile(OwningPawn, HitPawn))
 			{
 				FActiveGameplayEffectHandle ActiveGameplayEffectHandle = NativeApplyEffectSpecHandleToTarget(HitPawn,InSpecHandle);
 
@@ -90,7 +90,7 @@ void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FG
 					
 					UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 						HitPawn,
-						WarriorGameplayTags::Shared_Event_HitReact,
+						WGameplayTags::Shared_Event_HitReact,
 						Data
 					);
 				}

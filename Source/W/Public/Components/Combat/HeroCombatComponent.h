@@ -6,23 +6,23 @@
 #include "Components/Combat/PawnCombatComponent.h"
 #include "HeroCombatComponent.generated.h"
 
-class AWarriorHeroWeapon;
+class AWHeroWeapon;
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API UHeroCombatComponent : public UPawnCombatComponent
+class W_API UHeroCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
-	AWarriorHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
+	UFUNCTION(BlueprintCallable, Category = "W|Combat")
+	AWHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
-	AWarriorHeroWeapon* GetHeroCurrentEquippedWeapon() const;
+	UFUNCTION(BlueprintCallable, Category = "W|Combat")
+	AWHeroWeapon* GetHeroCurrentEquippedWeapon() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "W|Combat")
 	float GetHeroCurrentEquippWeaponDamageAtLevel(float InLevel) const;
 
 	virtual void OnHitTargetActor(AActor* HitActor) override;

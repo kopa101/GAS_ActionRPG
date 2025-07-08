@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "WarriorAIController.generated.h"
+#include "WAIController.generated.h"
 
 class UAIPerceptionComponent;
 class UAISenseConfig_Sight;
@@ -12,12 +12,12 @@ class UAISenseConfig_Sight;
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorAIController : public AAIController
+class W_API AWAIController : public AAIController
 {
 	GENERATED_BODY()
 	
 public:
-	AWarriorAIController(const FObjectInitializer& ObjectInitializer);
+	AWAIController(const FObjectInitializer& ObjectInitializer);
 
 	//~ Begin IGenericTeamAgentInterface Interface.
 	virtual ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;

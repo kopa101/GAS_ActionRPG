@@ -1,13 +1,13 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Items/Weapons/WarriorWeaponBase.h"
+#include "Items/Weapons/WWeaponBase.h"
 #include "Components/BoxComponent.h"
-#include "WarriorFunctionLibrary.h"
+#include "WFunctionLibrary.h"
 
-#include "WarriorDebugHelper.h"
+#include "WDebugHelper.h"
 
-AWarriorWeaponBase::AWarriorWeaponBase()
+AWWeaponBase::AWWeaponBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -23,7 +23,7 @@ AWarriorWeaponBase::AWarriorWeaponBase()
 	WeaponCollisionBox->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnCollisionBoxEndOverlap);
 }
 
-void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 
@@ -31,14 +31,14 @@ void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Overlap
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
+		if (UWFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
 			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
 		}
 	}
 }
 
-void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AWWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 
@@ -46,7 +46,7 @@ void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* Overlappe
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
+		if (UWFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
 			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
 		}

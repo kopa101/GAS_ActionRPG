@@ -1,13 +1,13 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "WarriorTypes/WarriorCountDownAction.h"
+#include "WTypes/WCountDownAction.h"
 
-void FWarriorCountDownAction::UpdateOperation(FLatentResponse& Response)
+void FWCountDownAction::UpdateOperation(FLatentResponse& Response)
 {
 	if (bNeedToCancel)
 	{
-		CountDownOutput = EWarriorCountDownActionOutput::Cancelled;
+		CountDownOutput = EWCountDownActionOutput::Cancelled;
 
 		Response.FinishAndTriggerIf(true,ExecutionFunction,OutputLink,CallbackTarget);
 
@@ -16,7 +16,7 @@ void FWarriorCountDownAction::UpdateOperation(FLatentResponse& Response)
 
 	if (ElapsedTimeSinceStart >= TotalCountDownTime)
 	{
-		CountDownOutput = EWarriorCountDownActionOutput::Completed;
+		CountDownOutput = EWCountDownActionOutput::Completed;
 
 		Response.FinishAndTriggerIf(true,ExecutionFunction,OutputLink,CallbackTarget);
 
@@ -33,7 +33,7 @@ void FWarriorCountDownAction::UpdateOperation(FLatentResponse& Response)
 
 		OutRemainingTime = TotalCountDownTime - ElapsedTimeSinceStart;
 
-		CountDownOutput = EWarriorCountDownActionOutput::Updated;
+		CountDownOutput = EWCountDownActionOutput::Updated;
 
 		Response.TriggerLink(ExecutionFunction,OutputLink,CallbackTarget);
 		  
@@ -41,7 +41,7 @@ void FWarriorCountDownAction::UpdateOperation(FLatentResponse& Response)
 	}
 }
 
-void FWarriorCountDownAction::CancelAction()
+void FWCountDownAction::CancelAction()
 {
 	bNeedToCancel = true;
 }

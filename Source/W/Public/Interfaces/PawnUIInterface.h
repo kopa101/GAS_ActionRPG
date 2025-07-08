@@ -20,7 +20,7 @@ class UPawnUIInterface : public UInterface
 /**
  * 
  */
-class WARRIOR_API IPawnUIInterface
+class W_API IPawnUIInterface
 {
 	GENERATED_BODY()
 

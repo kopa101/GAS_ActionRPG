@@ -6,22 +6,22 @@
 #include "Components/UI/PawnUIComponent.h"
 #include "EnemyUIComponent.generated.h"
 
-class UWarriorWidgetBase;
+class UWWidgetBase;
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API UEnemyUIComponent : public UPawnUIComponent
+class W_API UEnemyUIComponent : public UPawnUIComponent
 {
 	GENERATED_BODY()
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void RegisterEnemyDrawnWidget(UWarriorWidgetBase* InWidgetToRegister);
+	void RegisterEnemyDrawnWidget(UWWidgetBase* InWidgetToRegister);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveEnemyDrawnWidgetsIfAny();
 
 private:
-	TArray<UWarriorWidgetBase*> EnemyDrawnWidgets;
+	TArray<UWWidgetBase*> EnemyDrawnWidgets;
 };

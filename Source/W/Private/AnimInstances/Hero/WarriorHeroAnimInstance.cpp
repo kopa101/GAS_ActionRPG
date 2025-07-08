@@ -1,20 +1,20 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AnimInstances/Hero/WarriorHeroAnimInstance.h"
-#include "Characters/WarriorHeroCharacter.h"
+#include "AnimInstances/Hero/WHeroAnimInstance.h"
+#include "Characters/WHeroCharacter.h"
 
-void UWarriorHeroAnimInstance::NativeInitializeAnimation()
+void UWHeroAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 
 	if (OwningCharacter)
 	{
-		OwningHeroCharacter = Cast<AWarriorHeroCharacter>(OwningCharacter);
+		OwningHeroCharacter = Cast<AWHeroCharacter>(OwningCharacter);
 	}
 }
 
-void UWarriorHeroAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
+void UWHeroAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeThreadSafeUpdateAnimation(DeltaSeconds);
 

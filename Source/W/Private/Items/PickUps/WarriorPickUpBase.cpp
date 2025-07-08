@@ -1,10 +1,10 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Items/PickUps/WPickUpBase.h"
+#include "Items/PickUps/WarriorPickUpBase.h"
 #include "Components/SphereComponent.h"
 
-AWPickUpBase::AWPickUpBase()
+AWarriorPickUpBase::AWarriorPickUpBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -15,7 +15,7 @@ AWPickUpBase::AWPickUpBase()
 
 }
 
-void AWPickUpBase::OnPickUpCollisionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWarriorPickUpBase::OnPickUpCollisionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 }
 

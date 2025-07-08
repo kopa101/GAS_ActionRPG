@@ -3,16 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AnimInstances/WCharacterAnimInstance.h"
-#include "WHeroAnimInstance.generated.h"
+#include "AnimInstances/WarriorCharacterAnimInstance.h"
+#include "WarriorHeroAnimInstance.generated.h"
 
-class AWHeroCharacter;
+class AWarriorHeroCharacter;
 
 /**
  * 
  */
 UCLASS()
-class W_API UWHeroAnimInstance : public UWCharacterAnimInstance
+class WARRIOR_API UWarriorHeroAnimInstance : public UWarriorCharacterAnimInstance
 {
 	GENERATED_BODY()
 	
@@ -22,7 +22,7 @@ public:
 
 protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|Refrences")
-	AWHeroCharacter* OwningHeroCharacter;
+	AWarriorHeroCharacter* OwningHeroCharacter;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
 	bool bShouldEnterRelaxState;

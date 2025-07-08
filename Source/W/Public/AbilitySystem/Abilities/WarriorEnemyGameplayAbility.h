@@ -3,29 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/WGameplayAbility.h"
-#include "WEnemyGameplayAbility.generated.h"
+#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "WarriorEnemyGameplayAbility.generated.h"
 
-class AWEnemyCharacter;
+class AWarriorEnemyCharacter;
 class UEnemyCombatComponent;
 /**
  * 
  */
 UCLASS()
-class W_API UWEnemyGameplayAbility : public UWGameplayAbility
+class WARRIOR_API UWarriorEnemyGameplayAbility : public UWarriorGameplayAbility
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
-	AWEnemyCharacter* GetEnemyCharacterFromActorInfo();
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	AWarriorEnemyCharacter* GetEnemyCharacterFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	UEnemyCombatComponent* GetEnemyCombatComponentFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	FGameplayEffectSpecHandle MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass,const FScalableFloat& InDamageScalableFloat);
 
 private:
-	TWeakObjectPtr<AWEnemyCharacter> CachedWEnemyCharacter;
+	TWeakObjectPtr<AWarriorEnemyCharacter> CachedWarriorEnemyCharacter;
 };

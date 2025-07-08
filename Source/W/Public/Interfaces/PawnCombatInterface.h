@@ -18,7 +18,7 @@ class UPawnCombatInterface : public UInterface
 /**
  * 
  */
-class W_API IPawnCombatInterface
+class WARRIOR_API IPawnCombatInterface
 {
 	GENERATED_BODY()
 

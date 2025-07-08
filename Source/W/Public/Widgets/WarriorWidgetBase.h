@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "WWidgetBase.generated.h"
+#include "WarriorWidgetBase.generated.h"
 
 class UHeroUIComponent;
 class UEnemyUIComponent;
@@ -12,7 +12,7 @@ class UEnemyUIComponent;
  * 
  */
 UCLASS()
-class W_API UWWidgetBase : public UUserWidget
+class WARRIOR_API UWarriorWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
 	

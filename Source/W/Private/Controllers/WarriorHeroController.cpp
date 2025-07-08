@@ -1,14 +1,14 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Controllers/WHeroController.h"
+#include "Controllers/WarriorHeroController.h"
 
-AWHeroController::AWHeroController()
+AWarriorHeroController::AWarriorHeroController()
 {
 	HeroTeamID = FGenericTeamId(0);
 }
 
-FGenericTeamId AWHeroController::GetGenericTeamId() const
+FGenericTeamId AWarriorHeroController::GetGenericTeamId() const
 {
 	return HeroTeamID;
 }

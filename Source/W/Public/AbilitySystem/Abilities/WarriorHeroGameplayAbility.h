@@ -3,40 +3,40 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/WGameplayAbility.h"
-#include "WHeroGameplayAbility.generated.h"
+#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "WarriorHeroGameplayAbility.generated.h"
 
-class AWHeroCharacter;
-class AWHeroController;
+class AWarriorHeroCharacter;
+class AWarriorHeroController;
 
 /**
  * 
  */
 UCLASS()
-class W_API UWHeroGameplayAbility : public UWGameplayAbility
+class WARRIOR_API UWarriorHeroGameplayAbility : public UWarriorGameplayAbility
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
-	AWHeroCharacter* GetHeroCharacterFromActorInfo();
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	AWarriorHeroCharacter* GetHeroCharacterFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
-	AWHeroController* GetHeroControllerFromActorInfo();
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	AWarriorHeroController* GetHeroControllerFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	UHeroCombatComponent* GetHeroCombatComponentFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	UHeroUIComponent* GetHeroUIComponentFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "W|Ability")
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass,float InWeaponBaseDamage,FGameplayTag InCurrentAttackTypeTag,int32 InUsedComboCount);
 	
-	UFUNCTION(BlueprintCallable, Category = "W|Ability")
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Ability")
 	bool GetAbilityRemainingCooldownByTag(FGameplayTag InCooldownTag,float& TotalCooldownTime,float& RemainingCooldownTime);
 
 private:
-	TWeakObjectPtr<AWHeroCharacter> CachedWHeroCharacter;
-	TWeakObjectPtr<AWHeroController> CachedWHeroController;
+	TWeakObjectPtr<AWarriorHeroCharacter> CachedWarriorHeroCharacter;
+	TWeakObjectPtr<AWarriorHeroController> CachedWarriorHeroController;
 };

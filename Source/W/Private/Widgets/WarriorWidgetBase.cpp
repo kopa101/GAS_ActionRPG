@@ -1,10 +1,10 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Widgets/WWidgetBase.h"
+#include "Widgets/WarriorWidgetBase.h"
 #include "Interfaces/PawnUIInterface.h"
 
-void UWWidgetBase::NativeOnInitialized()
+void UWarriorWidgetBase::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
@@ -17,7 +17,7 @@ void UWWidgetBase::NativeOnInitialized()
 	}
 }
 
-void UWWidgetBase::InitEnemyCreatedWidget(AActor* OwningEnemyActor)
+void UWarriorWidgetBase::InitEnemyCreatedWidget(AActor* OwningEnemyActor)
 {
 	if (IPawnUIInterface* PawnUIInterface = Cast<IPawnUIInterface>(OwningEnemyActor))
 	{

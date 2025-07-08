@@ -4,14 +4,14 @@
 
 #include "GameplayTagContainer.h"
 #include "ScalableFloat.h"
-#include "WStructTypes.generated.h"
+#include "WarriorStructTypes.generated.h"
 
-class UWHeroLinkedAnimLayer;
-class UWHeroGameplayAbility;
+class UWarriorHeroLinkedAnimLayer;
+class UWarriorHeroGameplayAbility;
 class UInputMappingContext;
 
 USTRUCT(BlueprintType)
-struct FWHeroAbilitySet
+struct FWarriorHeroAbilitySet
 {
 	GENERATED_BODY()
 	 
@@ -19,13 +19,13 @@ struct FWHeroAbilitySet
 	FGameplayTag InputTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UWHeroGameplayAbility> AbilityToGrant;
+	TSubclassOf<UWarriorHeroGameplayAbility> AbilityToGrant;
 
 	bool IsValid() const;
 };
 
 USTRUCT(BlueprintType)
-struct FWHeroSpecialAbilitySet : public FWHeroAbilitySet
+struct FWarriorHeroSpecialAbilitySet : public FWarriorHeroAbilitySet
 {
 	GENERATED_BODY()
 
@@ -37,21 +37,21 @@ struct FWHeroSpecialAbilitySet : public FWHeroAbilitySet
 };
 
 USTRUCT(BlueprintType)
-struct FWHeroWeaponData
+struct FWarriorHeroWeaponData
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	TSubclassOf<UWHeroLinkedAnimLayer> WeaponAnimLayerToLink;
+	TSubclassOf<UWarriorHeroLinkedAnimLayer> WeaponAnimLayerToLink;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	UInputMappingContext* WeaponInputMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
-	TArray<FWHeroAbilitySet> DefaultWeaponAbilities;
+	TArray<FWarriorHeroAbilitySet> DefaultWeaponAbilities;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
-	TArray<FWHeroSpecialAbilitySet> SpecialWeaponAbilities;
+	TArray<FWarriorHeroSpecialAbilitySet> SpecialWeaponAbilities;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	FScalableFloat WeaponBaseDamage;

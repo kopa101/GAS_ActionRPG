@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "WTypes/WEnumTypes.h"
-#include "WSaveGame.generated.h"
+#include "WarriorTypes/WarriorEnumTypes.h"
+#include "WarriorSaveGame.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class W_API UWSaveGame : public USaveGame
+class WARRIOR_API UWarriorSaveGame : public USaveGame
 {
 	GENERATED_BODY()
 	
 public:
 	UPROPERTY(BlueprintReadOnly)
-	EWGameDifficulty SavedCurrentGameDifficulty;
+	EWarriorGameDifficulty SavedCurrentGameDifficulty;
 };

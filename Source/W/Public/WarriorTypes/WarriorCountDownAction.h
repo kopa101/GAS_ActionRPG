@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "WTypes/WEnumTypes.h"
+#include "WarriorTypes/WarriorEnumTypes.h"
 
-class FWCountDownAction : public FPendingLatentAction
+class FWarriorCountDownAction : public FPendingLatentAction
 {
 public:
-	FWCountDownAction(float InTotalCountDownTime,float InUpdateInterval,float& InOutRemainingTime,EWCountDownActionOutput& InCountDownOutput,const FLatentActionInfo& LatentInfo)
+	FWarriorCountDownAction(float InTotalCountDownTime,float InUpdateInterval,float& InOutRemainingTime,EWarriorCountDownActionOutput& InCountDownOutput,const FLatentActionInfo& LatentInfo)
 	: bNeedToCancel(false)
 	, TotalCountDownTime(InTotalCountDownTime)
 	, UpdateInterval(InUpdateInterval)
@@ -31,7 +31,7 @@ private:
 	float TotalCountDownTime;
 	float UpdateInterval;
 	float& OutRemainingTime;
-	EWCountDownActionOutput& CountDownOutput;
+	EWarriorCountDownActionOutput& CountDownOutput;
 	FName ExecutionFunction;
 	int32 OutputLink;
 	FWeakObjectPtr CallbackTarget;

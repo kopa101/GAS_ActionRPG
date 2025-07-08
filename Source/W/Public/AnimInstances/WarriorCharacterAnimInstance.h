@@ -3,16 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AnimInstances/WBaseAnimInstance.h"
-#include "WCharacterAnimInstance.generated.h"
+#include "AnimInstances/WarriorBaseAnimInstance.h"
+#include "WarriorCharacterAnimInstance.generated.h"
 
-class AWBaseCharacter;
+class AWarriorBaseCharacter;
 class UCharacterMovementComponent;
 /**
  * 
  */
 UCLASS()
-class W_API UWCharacterAnimInstance : public UWBaseAnimInstance
+class WARRIOR_API UWarriorCharacterAnimInstance : public UWarriorBaseAnimInstance
 {
 	GENERATED_BODY()
 	
@@ -22,7 +22,7 @@ public:
 
 protected:
 	UPROPERTY()
-	AWBaseCharacter* OwningCharacter;
+	AWarriorBaseCharacter* OwningCharacter;
 
 	UPROPERTY()
 	UCharacterMovementComponent* OwningMovementComponent;

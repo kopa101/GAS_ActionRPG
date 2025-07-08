@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class W_API UEnemyCombatComponent : public UPawnCombatComponent
+class WARRIOR_API UEnemyCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
 	

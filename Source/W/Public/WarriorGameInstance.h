@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "GameplayTagContainer.h"
-#include "WGameInstance.generated.h"
+#include "WarriorGameInstance.generated.h"
 
 USTRUCT(BlueprintType)
-struct FWGameLevelSet
+struct FWarriorGameLevelSet
 {
 	GENERATED_BODY()
 
@@ -30,7 +30,7 @@ struct FWGameLevelSet
  * 
  */
 UCLASS()
-class W_API UWGameInstance : public UGameInstance
+class WARRIOR_API UWarriorGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
@@ -42,7 +42,7 @@ protected:
 	virtual void OnDestinationWorldLoaded(UWorld* LoadedWorld);
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	TArray<FWGameLevelSet> GameLevelSets;
+	TArray<FWarriorGameLevelSet> GameLevelSets;
 
 public:
 	UFUNCTION(BlueprintPure, meta =(GameplayTagFilter = "GameData.Level"))

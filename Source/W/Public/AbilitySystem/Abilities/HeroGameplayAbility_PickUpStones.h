@@ -3,15 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/WHeroGameplayAbility.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 #include "HeroGameplayAbility_PickUpStones.generated.h"
 
-class AWStoneBase;
+class AWarriorStoneBase;
 /**
  * 
  */
 UCLASS()
-class W_API UHeroGameplayAbility_PickUpStones : public UWHeroGameplayAbility
+class WARRIOR_API UHeroGameplayAbility_PickUpStones : public UWarriorHeroGameplayAbility
 {
 	GENERATED_BODY()
 	
@@ -41,5 +41,5 @@ private:
 	bool bDrawDebugShape = false;
 
 	UPROPERTY()
-	TArray<AWStoneBase*> CollectedStones;
+	TArray<AWarriorStoneBase*> CollectedStones;
 };

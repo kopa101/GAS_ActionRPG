@@ -8,7 +8,7 @@
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class W_API UPawnExtensionComponentBase : public UActorComponent
+class WARRIOR_API UPawnExtensionComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
 	

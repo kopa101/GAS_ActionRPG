@@ -7,7 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "PawnCombatComponent.generated.h"
 
-class AWWeaponBase;
+class AWarriorWeaponBase;
 
 UENUM(BlueprintType)
 enum class EToggleDamageType : uint8
@@ -20,24 +20,24 @@ enum class EToggleDamageType : uint8
  * 
  */
 UCLASS()
-class W_API UPawnCombatComponent : public UPawnExtensionComponentBase
+class WARRIOR_API UPawnCombatComponent : public UPawnExtensionComponentBase
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "W|Combat")
-	void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister,AWWeaponBase* InWeaponToRegister,bool bRegisterAsEquippedWeapon = false);
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister,AWarriorWeaponBase* InWeaponToRegister,bool bRegisterAsEquippedWeapon = false);
 
-	UFUNCTION(BlueprintCallable, Category = "W|Combat")
-	AWWeaponBase* GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const;
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	AWarriorWeaponBase* GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const;
 
-	UPROPERTY(BlueprintReadWrite, Category = "W|Combat")
+	UPROPERTY(BlueprintReadWrite, Category = "Warrior|Combat")
 	FGameplayTag CurrentEquippedWeaponTag;
 
-	UFUNCTION(BlueprintCallable, Category = "W|Combat")
-	AWWeaponBase* GetCharacterCurrentEquippedWeapon() const;
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	AWarriorWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 
-	UFUNCTION(BlueprintCallable, Category = "W|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
 	void ToggleWeaponCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
 
 	virtual void OnHitTargetActor(AActor* HitActor);
@@ -50,5 +50,5 @@ protected:
 	TArray<AActor*> OverlappedActors;
 
 private:
-	TMap<FGameplayTag,AWWeaponBase*> CharacterCarriedWeaponMap;
+	TMap<FGameplayTag,AWarriorWeaponBase*> CharacterCarriedWeaponMap;
 };

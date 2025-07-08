@@ -1,29 +1,29 @@
 // Vince Petrelli All Rights Reserved
 
-#include "WFunctionLibrary.h"
+#include "WarriorFunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "AbilitySystem/WAbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
 #include "GenericTeamAgentInterface.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "WGameplayTags.h"
-#include "WTypes/WCountDownAction.h"
-#include "WGameInstance.h"
+#include "WarriorGameplayTags.h"
+#include "WarriorTypes/WarriorCountDownAction.h"
+#include "WarriorGameInstance.h"
 #include "Kismet/GameplayStatics.h"
-#include "SaveGame/WSaveGame.h"
+#include "SaveGame/WarriorSaveGame.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-UWAbilitySystemComponent* UWFunctionLibrary::NativeGetWASCFromActor(AActor* InActor)
+UWarriorAbilitySystemComponent* UWarriorFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)
 {   
     check(InActor);
 
-    return CastChecked<UWAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InActor));
+    return CastChecked<UWarriorAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InActor));
 }
 
-void UWFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGameplayTag TagToAdd)
+void UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGameplayTag TagToAdd)
 {
-    UWAbilitySystemComponent* ASC = NativeGetWASCFromActor(InActor);
+    UWarriorAbilitySystemComponent* ASC = NativeGetWarriorASCFromActor(InActor);
 
     if (!ASC->HasMatchingGameplayTag(TagToAdd))
     {
@@ -31,9 +31,9 @@ void UWFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGameplayTa
     }
 }
 
-void UWFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGameplayTag TagToRemove)
+void UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGameplayTag TagToRemove)
 {
-    UWAbilitySystemComponent* ASC = NativeGetWASCFromActor(InActor);
+    UWarriorAbilitySystemComponent* ASC = NativeGetWarriorASCFromActor(InActor);
 
     if (ASC->HasMatchingGameplayTag(TagToRemove))
     {
@@ -41,19 +41,19 @@ void UWFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGame
     }
 }
 
-bool UWFunctionLibrary::NativeDoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck)
+bool UWarriorFunctionLibrary::NativeDoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck)
 {
-    UWAbilitySystemComponent* ASC = NativeGetWASCFromActor(InActor);
+    UWarriorAbilitySystemComponent* ASC = NativeGetWarriorASCFromActor(InActor);
 
     return ASC->HasMatchingGameplayTag(TagToCheck);
 }
 
-void UWFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EWConfirmType& OutConfirmType)
+void UWarriorFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EWarriorConfirmType& OutConfirmType)
 {
-    OutConfirmType = NativeDoesActorHaveTag(InActor,TagToCheck)? EWConfirmType::Yes : EWConfirmType::No;
+    OutConfirmType = NativeDoesActorHaveTag(InActor,TagToCheck)? EWarriorConfirmType::Yes : EWarriorConfirmType::No;
 }
 
-UPawnCombatComponent* UWFunctionLibrary::NativeGetPawnCombatComponentFromActor(AActor* InActor)
+UPawnCombatComponent* UWarriorFunctionLibrary::NativeGetPawnCombatComponentFromActor(AActor* InActor)
 {   
     check(InActor);
 
@@ -65,16 +65,16 @@ UPawnCombatComponent* UWFunctionLibrary::NativeGetPawnCombatComponentFromActor(A
     return nullptr;
 }
 
-UPawnCombatComponent* UWFunctionLibrary::BP_GetPawnCombatComponentFromActor(AActor* InActor, EWValidType& OutValidType)
+UPawnCombatComponent* UWarriorFunctionLibrary::BP_GetPawnCombatComponentFromActor(AActor* InActor, EWarriorValidType& OutValidType)
 {   
     UPawnCombatComponent* CombatComponent = NativeGetPawnCombatComponentFromActor(InActor);
 
-    OutValidType = CombatComponent? EWValidType::Valid : EWValidType::Invalid;
+    OutValidType = CombatComponent? EWarriorValidType::Valid : EWarriorValidType::Invalid;
 
     return CombatComponent;
 }
 
-bool UWFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn)
+bool UWarriorFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn)
 {   
     check(QueryPawn && TargetPawn);
 
@@ -89,12 +89,12 @@ bool UWFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn)
     return false;
 }
 
-float UWFunctionLibrary::GetScalableFloatValueAtLevel(const FScalableFloat& InScalableFloat, float InLevel)
+float UWarriorFunctionLibrary::GetScalableFloatValueAtLevel(const FScalableFloat& InScalableFloat, float InLevel)
 {
     return InScalableFloat.GetValueAtLevel(InLevel);
 }
 
-FGameplayTag UWFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAttacker, AActor* InVictim, float& OutAngleDifference)
+FGameplayTag UWarriorFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAttacker, AActor* InVictim, float& OutAngleDifference)
 {   
     check(InAttacker && InVictim);
 
@@ -113,25 +113,25 @@ FGameplayTag UWFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAttacker, 
 
     if (OutAngleDifference>=-45.f && OutAngleDifference <=45.f)
     {
-        return WGameplayTags::Shared_Status_HitReact_Front;
+        return WarriorGameplayTags::Shared_Status_HitReact_Front;
     }
     else if (OutAngleDifference<-45.f && OutAngleDifference>=-135.f)
     {
-        return WGameplayTags::Shared_Status_HitReact_Left;
+        return WarriorGameplayTags::Shared_Status_HitReact_Left;
     }
     else if (OutAngleDifference<-135.f || OutAngleDifference>135.f)
     {
-        return WGameplayTags::Shared_Status_HitReact_Back;
+        return WarriorGameplayTags::Shared_Status_HitReact_Back;
     }
     else if(OutAngleDifference>45.f && OutAngleDifference<=135.f)
     {
-        return WGameplayTags::Shared_Status_HitReact_Right;
+        return WarriorGameplayTags::Shared_Status_HitReact_Right;
     }
 
-    return WGameplayTags::Shared_Status_HitReact_Front;
+    return WarriorGameplayTags::Shared_Status_HitReact_Front;
 }
 
-bool UWFunctionLibrary::IsValidBlock(AActor* InAttacker, AActor* InDefender)
+bool UWarriorFunctionLibrary::IsValidBlock(AActor* InAttacker, AActor* InDefender)
 {   
     check(InAttacker && InDefender);
 
@@ -144,17 +144,17 @@ bool UWFunctionLibrary::IsValidBlock(AActor* InAttacker, AActor* InDefender)
     return DotResult<-0.1f;
 }
 
-bool UWFunctionLibrary::ApplyGameplayEffectSpecHandleToTargetActor(AActor* InInstigator, AActor* InTargetActor, const FGameplayEffectSpecHandle& InSpecHandle)
+bool UWarriorFunctionLibrary::ApplyGameplayEffectSpecHandleToTargetActor(AActor* InInstigator, AActor* InTargetActor, const FGameplayEffectSpecHandle& InSpecHandle)
 {   
-    UWAbilitySystemComponent* SourceASC = NativeGetWASCFromActor(InInstigator);
-    UWAbilitySystemComponent* TargetASC = NativeGetWASCFromActor(InTargetActor);
+    UWarriorAbilitySystemComponent* SourceASC = NativeGetWarriorASCFromActor(InInstigator);
+    UWarriorAbilitySystemComponent* TargetASC = NativeGetWarriorASCFromActor(InTargetActor);
 
     FActiveGameplayEffectHandle ActiveGameplayEffectHandle = SourceASC->ApplyGameplayEffectSpecToTarget(*InSpecHandle.Data,TargetASC);
 
     return ActiveGameplayEffectHandle.WasSuccessfullyApplied();
 }
 
-void UWFunctionLibrary::CountDown(const UObject* WorldContextObject, float TotalTime, float UpdateInterval, float& OutRemainingTime, EWCountDownActionInput CountDownInput, UPARAM(DisplayName = "Output") EWCountDownActionOutput& CountDownOutput, FLatentActionInfo LatentInfo)
+void UWarriorFunctionLibrary::CountDown(const UObject* WorldContextObject, float TotalTime, float UpdateInterval, float& OutRemainingTime, EWarriorCountDownActionInput CountDownInput, UPARAM(DisplayName = "Output") EWarriorCountDownActionOutput& CountDownOutput, FLatentActionInfo LatentInfo)
 {
     UWorld* World = nullptr;
 
@@ -170,21 +170,21 @@ void UWFunctionLibrary::CountDown(const UObject* WorldContextObject, float Total
 
     FLatentActionManager& LatentActionManager = World->GetLatentActionManager();
 
-    FWCountDownAction* FoundAction = LatentActionManager.FindExistingAction<FWCountDownAction>(LatentInfo.CallbackTarget,LatentInfo.UUID);
+    FWarriorCountDownAction* FoundAction = LatentActionManager.FindExistingAction<FWarriorCountDownAction>(LatentInfo.CallbackTarget,LatentInfo.UUID);
 
-    if (CountDownInput == EWCountDownActionInput::Start)
+    if (CountDownInput == EWarriorCountDownActionInput::Start)
     {
         if (!FoundAction)
         {
             LatentActionManager.AddNewAction(
                 LatentInfo.CallbackTarget,
                 LatentInfo.UUID,
-                new FWCountDownAction(TotalTime,UpdateInterval,OutRemainingTime,CountDownOutput,LatentInfo)
+                new FWarriorCountDownAction(TotalTime,UpdateInterval,OutRemainingTime,CountDownOutput,LatentInfo)
             );
         }
     }
 
-    if (CountDownInput == EWCountDownActionInput::Cancel)
+    if (CountDownInput == EWarriorCountDownActionInput::Cancel)
     {
         if (FoundAction)
         {
@@ -194,20 +194,20 @@ void UWFunctionLibrary::CountDown(const UObject* WorldContextObject, float Total
     
 }
 
-UWGameInstance* UWFunctionLibrary::GetWGameInstance(const UObject* WorldContextObject)
+UWarriorGameInstance* UWarriorFunctionLibrary::GetWarriorGameInstance(const UObject* WorldContextObject)
 {   
     if (GEngine)
     {
         if (UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull))
         {
-            return World->GetGameInstance<UWGameInstance>();
+            return World->GetGameInstance<UWarriorGameInstance>();
         }
     }
 
     return nullptr;
 }
 
-void UWFunctionLibrary::ToggleInputMode(const UObject* WorldContextObject, EWInputMode InInputMode)
+void UWarriorFunctionLibrary::ToggleInputMode(const UObject* WorldContextObject, EWarriorInputMode InInputMode)
 {
 	APlayerController* PlayerController = nullptr;
 
@@ -229,14 +229,14 @@ void UWFunctionLibrary::ToggleInputMode(const UObject* WorldContextObject, EWInp
 
     switch (InInputMode)
     {
-    case EWInputMode::GameOnly:
+    case EWarriorInputMode::GameOnly:
         
         PlayerController->SetInputMode(GameOnlyMode);
         PlayerController->bShowMouseCursor = false;
 
         break;
 
-    case EWInputMode::UIOnly:
+    case EWarriorInputMode::UIOnly:
 
 		PlayerController->SetInputMode(UIOnlyMode);
 		PlayerController->bShowMouseCursor = true;
@@ -248,29 +248,29 @@ void UWFunctionLibrary::ToggleInputMode(const UObject* WorldContextObject, EWInp
     }
 }
 
-void UWFunctionLibrary::SaveCurrentGameDifficulty(EWGameDifficulty InDifficultyToSave)
+void UWarriorFunctionLibrary::SaveCurrentGameDifficulty(EWarriorGameDifficulty InDifficultyToSave)
 {
-    USaveGame* SaveGameObject = UGameplayStatics::CreateSaveGameObject(UWSaveGame::StaticClass());
+    USaveGame* SaveGameObject = UGameplayStatics::CreateSaveGameObject(UWarriorSaveGame::StaticClass());
 
-    if (UWSaveGame* WSaveGameObject = Cast<UWSaveGame>(SaveGameObject))
+    if (UWarriorSaveGame* WarriorSaveGameObject = Cast<UWarriorSaveGame>(SaveGameObject))
     {
-        WSaveGameObject->SavedCurrentGameDifficulty = InDifficultyToSave;
+        WarriorSaveGameObject->SavedCurrentGameDifficulty = InDifficultyToSave;
 
-        const bool bWasSaved = UGameplayStatics::SaveGameToSlot(WSaveGameObject,WGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(),0);
+        const bool bWasSaved = UGameplayStatics::SaveGameToSlot(WarriorSaveGameObject,WarriorGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(),0);
 
         Debug::Print(bWasSaved? TEXT("Difficulty Saved") : TEXT("Difficulty NOT Saved"));
     }
 }
 
-bool UWFunctionLibrary::TryLoadSavedGameDifficulty(EWGameDifficulty& OutSavedDifficulty)
+bool UWarriorFunctionLibrary::TryLoadSavedGameDifficulty(EWarriorGameDifficulty& OutSavedDifficulty)
 {
-    if (UGameplayStatics::DoesSaveGameExist(WGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(), 0))
+    if (UGameplayStatics::DoesSaveGameExist(WarriorGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(), 0))
     {
-        USaveGame* SaveGameObject = UGameplayStatics::LoadGameFromSlot(WGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(),0);
+        USaveGame* SaveGameObject = UGameplayStatics::LoadGameFromSlot(WarriorGameplayTags::GameData_SaveGame_Slot_1.GetTag().ToString(),0);
 
-		if (UWSaveGame* WSaveGameObject = Cast<UWSaveGame>(SaveGameObject))
+		if (UWarriorSaveGame* WarriorSaveGameObject = Cast<UWarriorSaveGame>(SaveGameObject))
 		{
-            OutSavedDifficulty = WSaveGameObject->SavedCurrentGameDifficulty;
+            OutSavedDifficulty = WarriorSaveGameObject->SavedCurrentGameDifficulty;
 
             Debug::Print(TEXT("Loading Successful"),FColor::Green);
 

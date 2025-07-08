@@ -1,12 +1,12 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Items/PickUps/WStoneBase.h"
-#include "Characters/WHeroCharacter.h"
-#include "AbilitySystem/WAbilitySystemComponent.h"
-#include "WGameplayTags.h"
+#include "Items/PickUps/WarriorStoneBase.h"
+#include "Characters/WarriorHeroCharacter.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "WarriorGameplayTags.h"
 
-void AWStoneBase::Consume(UWAbilitySystemComponent* AbilitySystemComponent, int32 ApplyLevel)
+void AWarriorStoneBase::Consume(UWarriorAbilitySystemComponent* AbilitySystemComponent, int32 ApplyLevel)
 {	
 	check(StoneGameplayEffectClass);
 
@@ -21,10 +21,10 @@ void AWStoneBase::Consume(UWAbilitySystemComponent* AbilitySystemComponent, int3
 	BP_OnStoneConsumed();
 }
 
-void AWStoneBase::OnPickUpCollisionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWarriorStoneBase::OnPickUpCollisionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AWHeroCharacter* OverlappedHeroCharacter = Cast<AWHeroCharacter>(OtherActor))
+	if (AWarriorHeroCharacter* OverlappedHeroCharacter = Cast<AWarriorHeroCharacter>(OtherActor))
 	{
-		OverlappedHeroCharacter->GetWAbilitySystemComponent()->TryActivateAbilityByTag(WGameplayTags::Player_Ability_PickUp_Stones);
+		OverlappedHeroCharacter->GetWarriorAbilitySystemComponent()->TryActivateAbilityByTag(WarriorGameplayTags::Player_Ability_PickUp_Stones);
 	}
 }

@@ -7,21 +7,21 @@
 #include "AbilitySystemInterface.h"
 #include "Interfaces/PawnCombatInterface.h"
 #include "Interfaces/PawnUIInterface.h"
-#include "WBaseCharacter.generated.h"
+#include "WarriorBaseCharacter.generated.h"
 
-class UWAbilitySystemComponent;
-class UWAttributeSet;
+class UWarriorAbilitySystemComponent;
+class UWarriorAttributeSet;
 class UDataAsset_StartUpDataBase;
 class UMotionWarpingComponent;
 
 UCLASS()
-class W_API AWBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface, public IPawnUIInterface
+class WARRIOR_API AWarriorBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface, public IPawnUIInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AWBaseCharacter();
+	AWarriorBaseCharacter();
 
 	//~ Begin IAbilitySystemInterface Interface.
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
@@ -41,10 +41,10 @@ protected:
 	//~ End APawn Interface
 	 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
-	UWAbilitySystemComponent* WAbilitySystemComponent;
+	UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
-	UWAttributeSet* WAttributeSet;
+	UWarriorAttributeSet* WarriorAttributeSet;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MotionWarping")
 	UMotionWarpingComponent* MotionWarpingComponent;
@@ -53,7 +53,7 @@ protected:
 	TSoftObjectPtr<UDataAsset_StartUpDataBase> CharacterStartUpData;
 
 public:
-	FORCEINLINE UWAbilitySystemComponent* GetWAbilitySystemComponent() const {return WAbilitySystemComponent;}
+	FORCEINLINE UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const {return WarriorAbilitySystemComponent;}
 
-	FORCEINLINE UWAttributeSet* GetWAttributeSet() const {return WAttributeSet;}
+	FORCEINLINE UWarriorAttributeSet* GetWarriorAttributeSet() const {return WarriorAttributeSet;}
 };

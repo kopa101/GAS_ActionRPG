@@ -1,5 +1,5 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Components/Input/WInputComponent.h"
+#include "Components/Input/WarriorInputComponent.h"
 

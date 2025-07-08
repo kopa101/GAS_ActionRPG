@@ -1,21 +1,21 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Characters/WEnemyCharacter.h"
+#include "Characters/WarriorEnemyCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/Combat/EnemyCombatComponent.h"
 #include "Engine/AssetManager.h"
 #include "DataAssets/StartUpData/DataAsset_EnemyStartUpData.h"
 #include "Components/UI/EnemyUIComponent.h"
 #include "Components/WidgetComponent.h"
-#include "Widgets/WWidgetBase.h"
+#include "Widgets/WarriorWidgetBase.h"
 #include "Components/BoxComponent.h"
-#include "WFunctionLibrary.h"
-#include "GameModes/WBaseGameMode.h"
+#include "WarriorFunctionLibrary.h"
+#include "GameModes/WarriorBaseGameMode.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-AWEnemyCharacter::AWEnemyCharacter()
+AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 {
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
@@ -47,32 +47,32 @@ AWEnemyCharacter::AWEnemyCharacter()
 	RightHandCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBodyCollisionBoxBeginOverlap);
 }
 
-UPawnCombatComponent* AWEnemyCharacter::GetPawnCombatComponent() const
+UPawnCombatComponent* AWarriorEnemyCharacter::GetPawnCombatComponent() const
 {
 	return EnemyCombatComponent;
 }
 
-UPawnUIComponent* AWEnemyCharacter::GetPawnUIComponent() const
+UPawnUIComponent* AWarriorEnemyCharacter::GetPawnUIComponent() const
 {
 	return EnemyUIComponent;
 }
 
-UEnemyUIComponent* AWEnemyCharacter::GetEnemyUIComponent() const
+UEnemyUIComponent* AWarriorEnemyCharacter::GetEnemyUIComponent() const
 {
 	return EnemyUIComponent;
 }
 
-void AWEnemyCharacter::BeginPlay()
+void AWarriorEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (UWWidgetBase* HealthWidget = Cast<UWWidgetBase>(EnemyHealthWidgetComponent->GetUserWidgetObject()))
+	if (UWarriorWidgetBase* HealthWidget = Cast<UWarriorWidgetBase>(EnemyHealthWidgetComponent->GetUserWidgetObject()))
 	{
 		HealthWidget->InitEnemyCreatedWidget(this);
 	}
 }
 
-void AWEnemyCharacter::PossessedBy(AController* NewController)
+void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
@@ -80,7 +80,7 @@ void AWEnemyCharacter::PossessedBy(AController* NewController)
 }
 
 #if WITH_EDITOR
-void AWEnemyCharacter::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+void AWarriorEnemyCharacter::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
@@ -97,18 +97,18 @@ void AWEnemyCharacter::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 }
 #endif
 
-void AWEnemyCharacter::OnBodyCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWarriorEnemyCharacter::OnBodyCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (UWFunctionLibrary::IsTargetPawnHostile(this,HitPawn))
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(this,HitPawn))
 		{
 			EnemyCombatComponent->OnHitTargetActor(HitPawn);
 		}
 	}
 }
 
-void AWEnemyCharacter::InitEnemyStartUpData()
+void AWarriorEnemyCharacter::InitEnemyStartUpData()
 {
 	if (CharacterStartUpData.IsNull())
 	{
@@ -117,23 +117,23 @@ void AWEnemyCharacter::InitEnemyStartUpData()
 
 	int32 AbilityApplyLevel = 1;
 
-	if (AWBaseGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AWBaseGameMode>())
+	if (AWarriorBaseGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AWarriorBaseGameMode>())
 	{
 		switch (BaseGameMode->GetCurrentGameDifficulty())
 		{
-		case EWGameDifficulty::Easy:
+		case EWarriorGameDifficulty::Easy:
 			AbilityApplyLevel = 1;
 			break;
 
-		case EWGameDifficulty::Normal:
+		case EWarriorGameDifficulty::Normal:
 			AbilityApplyLevel = 2;
 			break;
 
-		case EWGameDifficulty::Hard:
+		case EWarriorGameDifficulty::Hard:
 			AbilityApplyLevel = 3;
 			break;
 
-		case EWGameDifficulty::VeryHard:
+		case EWarriorGameDifficulty::VeryHard:
 			AbilityApplyLevel = 4;
 			break;
 
@@ -149,7 +149,7 @@ void AWEnemyCharacter::InitEnemyStartUpData()
 			{
 				if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.Get())
 				{
-					LoadedData->GiveToAbilitySystemComponent(WAbilitySystemComponent,AbilityApplyLevel);
+					LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
 				}
 			}
 		)

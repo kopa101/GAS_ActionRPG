@@ -1,10 +1,10 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AnimInstances/Hero/WHeroLinkedAnimLayer.h"
-#include "AnimInstances/Hero/WHeroAnimInstance.h"
+#include "AnimInstances/Hero/WarriorHeroLinkedAnimLayer.h"
+#include "AnimInstances/Hero/WarriorHeroAnimInstance.h"
 
-UWHeroAnimInstance* UWHeroLinkedAnimLayer::GetHeroAnimInstance() const
+UWarriorHeroAnimInstance* UWarriorHeroLinkedAnimLayer::GetHeroAnimInstance() const
 {   
-    return Cast<UWHeroAnimInstance>(GetOwningComponent()->GetAnimInstance());
+    return Cast<UWarriorHeroAnimInstance>(GetOwningComponent()->GetAnimInstance());
 }

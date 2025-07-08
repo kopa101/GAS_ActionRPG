@@ -2,10 +2,10 @@
 
 
 #include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
-#include "AbilitySystem/WAbilitySystemComponent.h"
-#include "AbilitySystem/Abilities/WGameplayAbility.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
 
-void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UWAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
+void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	check(InASCToGive);
 
@@ -29,14 +29,14 @@ void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UWAbilitySystemCom
 	}
 }
  
-void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UWGameplayAbility>>& InAbilitiesToGive, UWAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
+void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive, UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	if (InAbilitiesToGive.IsEmpty())
 	{
 		return;
 	}
 
-	for (const TSubclassOf<UWGameplayAbility>& Ability : InAbilitiesToGive)
+	for (const TSubclassOf<UWarriorGameplayAbility>& Ability : InAbilitiesToGive)
 	{
 		if(!Ability) continue;
 

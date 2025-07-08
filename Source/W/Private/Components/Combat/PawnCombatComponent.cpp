@@ -2,12 +2,12 @@
 
 
 #include "Components/Combat/PawnCombatComponent.h"
-#include "Items/Weapons/WWeaponBase.h"
+#include "Items/Weapons/WarriorWeaponBase.h"
 #include "Components/BoxComponent.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, AWWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon)
+void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, AWarriorWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon)
 {
 	checkf(!CharacterCarriedWeaponMap.Contains(InWeaponTagToRegister),TEXT("A named named %s has already been added as carried weapon"),*InWeaponTagToRegister.ToString());
 	check(InWeaponToRegister);
@@ -23,11 +23,11 @@ void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegis
 	}
 }
 
-AWWeaponBase* UPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const
+AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const
 {
 	if (CharacterCarriedWeaponMap.Contains(InWeaponTagToGet))
 	{
-		if (AWWeaponBase* const* FoundWeapon = CharacterCarriedWeaponMap.Find(InWeaponTagToGet))
+		if (AWarriorWeaponBase* const* FoundWeapon = CharacterCarriedWeaponMap.Find(InWeaponTagToGet))
 		{
 			return *FoundWeapon;
 		}
@@ -36,7 +36,7 @@ AWWeaponBase* UPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGameplayTag 
 	return nullptr;
 }
 
-AWWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
+AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
 {
 	if (!CurrentEquippedWeaponTag.IsValid())
 	{
@@ -68,7 +68,7 @@ void UPawnCombatComponent::OnWeaponPulledFromTargetActor(AActor* InteractedActor
 
 void UPawnCombatComponent::ToggleCurrentEquippedWeaponCollision(bool bShouldEnable)
 {
-	AWWeaponBase* WeaponToToggle = GetCharacterCurrentEquippedWeapon();
+	AWarriorWeaponBase* WeaponToToggle = GetCharacterCurrentEquippedWeapon();
 
 	check(WeaponToToggle);
 

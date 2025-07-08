@@ -1,15 +1,15 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Controllers/WAIController.h"
+#include "Controllers/WarriorAIController.h"
 #include "Navigation/CrowdFollowingComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-AWAIController::AWAIController(const FObjectInitializer& ObjectInitializer)
+AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UCrowdFollowingComponent>("PathFollowingComponent"))
 {
 	AISenseConfig_Sight = CreateDefaultSubobject<UAISenseConfig_Sight>("EnemySenseConfig_Sight");
@@ -28,7 +28,7 @@ AWAIController::AWAIController(const FObjectInitializer& ObjectInitializer)
 	SetGenericTeamId(FGenericTeamId(1));
 }
 
-ETeamAttitude::Type AWAIController::GetTeamAttitudeTowards(const AActor& Other) const
+ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& Other) const
 {
 	const APawn* PawnToCheck = Cast<const APawn>(&Other);
 
@@ -42,7 +42,7 @@ ETeamAttitude::Type AWAIController::GetTeamAttitudeTowards(const AActor& Other) 
 	return ETeamAttitude::Friendly;
 }
 
-void AWAIController::BeginPlay()
+void AWarriorAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -67,7 +67,7 @@ void AWAIController::BeginPlay()
 
 }
 
-void AWAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
+void AWarriorAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {		
 	if (UBlackboardComponent* BlackboardComponent = GetBlackboardComponent())
 	{

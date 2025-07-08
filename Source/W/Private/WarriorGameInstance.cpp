@@ -1,10 +1,10 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "WGameInstance.h"
+#include "WarriorGameInstance.h"
 #include "MoviePlayer.h"
 
-void UWGameInstance::Init()
+void UWarriorGameInstance::Init()
 {
 	Super::Init();
 
@@ -12,7 +12,7 @@ void UWGameInstance::Init()
 	FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this,&ThisClass::OnDestinationWorldLoaded);
 }
 
-void UWGameInstance::OnPreLoadMap(const FString& MapName)
+void UWarriorGameInstance::OnPreLoadMap(const FString& MapName)
 {
 	FLoadingScreenAttributes LoadingScreenAttributes;
 	LoadingScreenAttributes.bAutoCompleteWhenLoadingCompletes = true;
@@ -22,14 +22,14 @@ void UWGameInstance::OnPreLoadMap(const FString& MapName)
 	GetMoviePlayer()->SetupLoadingScreen(LoadingScreenAttributes);
 }
 
-void UWGameInstance::OnDestinationWorldLoaded(UWorld* LoadedWorld)
+void UWarriorGameInstance::OnDestinationWorldLoaded(UWorld* LoadedWorld)
 {
 	GetMoviePlayer()->StopMovie();
 }
 
-TSoftObjectPtr<UWorld> UWGameInstance::GetGameLevelByTag(FGameplayTag InTag) const
+TSoftObjectPtr<UWorld> UWarriorGameInstance::GetGameLevelByTag(FGameplayTag InTag) const
 {
-	for (const FWGameLevelSet& GameLevelSet : GameLevelSets)
+	for (const FWarriorGameLevelSet& GameLevelSet : GameLevelSets)
 	{
 		if(!GameLevelSet.IsValid()) continue;
 

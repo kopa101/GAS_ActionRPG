@@ -4,24 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "WTypes/WEnumTypes.h"
-#include "WBaseGameMode.generated.h"
+#include "WarriorTypes/WarriorEnumTypes.h"
+#include "WarriorBaseGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class W_API AWBaseGameMode : public AGameModeBase
+class WARRIOR_API AWarriorBaseGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
 public:
-	AWBaseGameMode();
+	AWarriorBaseGameMode();
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Settings")
-	EWGameDifficulty CurrentGameDifficulty;
+	EWarriorGameDifficulty CurrentGameDifficulty;
 
 public:
-	FORCEINLINE EWGameDifficulty GetCurrentGameDifficulty() const { return CurrentGameDifficulty;}
+	FORCEINLINE EWarriorGameDifficulty GetCurrentGameDifficulty() const { return CurrentGameDifficulty;}
 };

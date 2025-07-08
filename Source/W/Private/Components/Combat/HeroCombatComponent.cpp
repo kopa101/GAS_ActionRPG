@@ -2,20 +2,20 @@
 
 
 #include "Components/Combat/HeroCombatComponent.h"
-#include "Items/Weapons/WHeroWeapon.h"
+#include "Items/Weapons/WarriorHeroWeapon.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "WGameplayTags.h"
+#include "WarriorGameplayTags.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-AWHeroWeapon* UHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const
+AWarriorHeroWeapon* UHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const
 {   
-    return Cast<AWHeroWeapon>(GetCharacterCarriedWeaponByTag(InWeaponTag));
+    return Cast<AWarriorHeroWeapon>(GetCharacterCarriedWeaponByTag(InWeaponTag));
 }
 
-AWHeroWeapon* UHeroCombatComponent::GetHeroCurrentEquippedWeapon() const
+AWarriorHeroWeapon* UHeroCombatComponent::GetHeroCurrentEquippedWeapon() const
 {	
-	return Cast<AWHeroWeapon>(GetCharacterCurrentEquippedWeapon());
+	return Cast<AWarriorHeroWeapon>(GetCharacterCurrentEquippedWeapon());
 }
 
 float UHeroCombatComponent::GetHeroCurrentEquippWeaponDamageAtLevel(float InLevel) const
@@ -38,13 +38,13 @@ void UHeroCombatComponent::OnHitTargetActor(AActor* HitActor)
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwningPawn(),
-		WGameplayTags::Shared_Event_MeleeHit,
+		WarriorGameplayTags::Shared_Event_MeleeHit,
 		Data
 	);
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwningPawn(),
-		WGameplayTags::Player_Event_HitPause,
+		WarriorGameplayTags::Player_Event_HitPause,
 		FGameplayEventData()
 	);
 }
@@ -53,7 +53,7 @@ void UHeroCombatComponent::OnWeaponPulledFromTargetActor(AActor* InteractedActor
 {
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwningPawn(),
-		WGameplayTags::Player_Event_HitPause,
+		WarriorGameplayTags::Player_Event_HitPause,
 		FGameplayEventData()
 	);
 }

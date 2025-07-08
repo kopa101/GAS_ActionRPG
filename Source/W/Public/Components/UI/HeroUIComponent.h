@@ -19,7 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStoneInteractedDelegate,bool,bSho
  * 
  */
 UCLASS()
-class W_API UHeroUIComponent : public UPawnUIComponent
+class WARRIOR_API UHeroUIComponent : public UPawnUIComponent
 {
 	GENERATED_BODY()
 	

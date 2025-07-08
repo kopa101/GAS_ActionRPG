@@ -6,24 +6,24 @@
 #include "Abilities/Tasks/AbilityTask.h"
 #include "AbilityTask_WaitSpawnEnemies.generated.h"
 
-class AWEnemyCharacter;
+class AWarriorEnemyCharacter;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWaitSpawnEnemiesDelegate,const TArray<AWEnemyCharacter*>&,SpawnedEnemies);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWaitSpawnEnemiesDelegate,const TArray<AWarriorEnemyCharacter*>&,SpawnedEnemies);
 
 /**
  * 
  */
 UCLASS()
-class W_API UAbilityTask_WaitSpawnEnemies : public UAbilityTask
+class WARRIOR_API UAbilityTask_WaitSpawnEnemies : public UAbilityTask
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "W|AbilityTasks", meta = (DisplayName = "Wait Gameplay Event And Spawn Enemies", HidePin = "OwningAbility",DefaultToSelf = "OwningAbility",BlueprintInternalUseOnly = "true",NumToSpawn = "1",RandomSpawnRadius = "200"))
+	UFUNCTION(BlueprintCallable, Category = "Warrior|AbilityTasks", meta = (DisplayName = "Wait Gameplay Event And Spawn Enemies", HidePin = "OwningAbility",DefaultToSelf = "OwningAbility",BlueprintInternalUseOnly = "true",NumToSpawn = "1",RandomSpawnRadius = "200"))
 	static UAbilityTask_WaitSpawnEnemies* WaitSpawnEnemies(
 		UGameplayAbility* OwningAbility,
 		FGameplayTag EventTag,
-		TSoftClassPtr<AWEnemyCharacter> SoftEnemyClassToSpawn,
+		TSoftClassPtr<AWarriorEnemyCharacter> SoftEnemyClassToSpawn,
 		int32 NumToSpawn,
 		const FVector& SpawnOrigin,
 		float RandomSpawnRadius
@@ -42,7 +42,7 @@ public:
 
 private:
 	FGameplayTag CachedEventTag;
-	TSoftClassPtr<AWEnemyCharacter> CachedSoftEnemyClassToSpawn;
+	TSoftClassPtr<AWarriorEnemyCharacter> CachedSoftEnemyClassToSpawn;
 	int32 CachedNumToSpawn;
 	FVector CachedSpawnOrigin;
 	float CachedRandomSpawnRadius;

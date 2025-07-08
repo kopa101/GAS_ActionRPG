@@ -1,59 +1,59 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AbilitySystem/Abilities/WHeroGameplayAbility.h"
-#include "Characters/WHeroCharacter.h"
-#include "Controllers/WHeroController.h"
-#include "AbilitySystem/WAbilitySystemComponent.h"
-#include "WGameplayTags.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "Characters/WarriorHeroCharacter.h"
+#include "Controllers/WarriorHeroController.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "WarriorGameplayTags.h"
 
-AWHeroCharacter* UWHeroGameplayAbility::GetHeroCharacterFromActorInfo()
+AWarriorHeroCharacter* UWarriorHeroGameplayAbility::GetHeroCharacterFromActorInfo()
 {   
-	if (!CachedWHeroCharacter.IsValid())
+	if (!CachedWarriorHeroCharacter.IsValid())
 	{
-		CachedWHeroCharacter = Cast<AWHeroCharacter>(CurrentActorInfo->AvatarActor);
+		CachedWarriorHeroCharacter = Cast<AWarriorHeroCharacter>(CurrentActorInfo->AvatarActor);
 	}
    
-    return CachedWHeroCharacter.IsValid()? CachedWHeroCharacter.Get() : nullptr;
+    return CachedWarriorHeroCharacter.IsValid()? CachedWarriorHeroCharacter.Get() : nullptr;
 }
 
-AWHeroController* UWHeroGameplayAbility::GetHeroControllerFromActorInfo()
+AWarriorHeroController* UWarriorHeroGameplayAbility::GetHeroControllerFromActorInfo()
 {	
-	if (!CachedWHeroController.IsValid())
+	if (!CachedWarriorHeroController.IsValid())
 	{
-		CachedWHeroController = Cast<AWHeroController>(CurrentActorInfo->PlayerController);
+		CachedWarriorHeroController = Cast<AWarriorHeroController>(CurrentActorInfo->PlayerController);
 	}
 
-	return CachedWHeroController.IsValid()? CachedWHeroController.Get() : nullptr;
+	return CachedWarriorHeroController.IsValid()? CachedWarriorHeroController.Get() : nullptr;
 }
 
-UHeroCombatComponent* UWHeroGameplayAbility::GetHeroCombatComponentFromActorInfo()
+UHeroCombatComponent* UWarriorHeroGameplayAbility::GetHeroCombatComponentFromActorInfo()
 {
 	return GetHeroCharacterFromActorInfo()->GetHeroCombatComponent();
 }
 
-UHeroUIComponent* UWHeroGameplayAbility::GetHeroUIComponentFromActorInfo()
+UHeroUIComponent* UWarriorHeroGameplayAbility::GetHeroUIComponentFromActorInfo()
 {
 	return GetHeroCharacterFromActorInfo()->GetHeroUIComponent();
 }
 
-FGameplayEffectSpecHandle UWHeroGameplayAbility::MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage, FGameplayTag InCurrentAttackTypeTag, int32 InUsedComboCount)
+FGameplayEffectSpecHandle UWarriorHeroGameplayAbility::MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage, FGameplayTag InCurrentAttackTypeTag, int32 InUsedComboCount)
 {	
 	check(EffectClass);
 
-	FGameplayEffectContextHandle ContextHandle = GetWAbilitySystemComponentFromActorInfo()->MakeEffectContext();
+	FGameplayEffectContextHandle ContextHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeEffectContext();
 	ContextHandle.SetAbility(this);
 	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
 	ContextHandle.AddInstigator(GetAvatarActorFromActorInfo(),GetAvatarActorFromActorInfo());
 
-	FGameplayEffectSpecHandle EffectSpecHandle = GetWAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(
+	FGameplayEffectSpecHandle EffectSpecHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(
 		EffectClass,
 		GetAbilityLevel(),
 		ContextHandle
 	);
 
 	EffectSpecHandle.Data->SetSetByCallerMagnitude(
-		WGameplayTags::Shared_SetByCaller_BaseDamage,
+		WarriorGameplayTags::Shared_SetByCaller_BaseDamage,
 		InWeaponBaseDamage
 	);
 
@@ -65,7 +65,7 @@ FGameplayEffectSpecHandle UWHeroGameplayAbility::MakeHeroDamageEffectSpecHandle(
 	return EffectSpecHandle;
 }
 
-bool UWHeroGameplayAbility::GetAbilityRemainingCooldownByTag(FGameplayTag InCooldownTag, float& TotalCooldownTime, float& RemainingCooldownTime)
+bool UWarriorHeroGameplayAbility::GetAbilityRemainingCooldownByTag(FGameplayTag InCooldownTag, float& TotalCooldownTime, float& RemainingCooldownTime)
 {
 	check(InCooldownTag.IsValid());
 

@@ -2,37 +2,37 @@
 
 
 #include "AbilitySystem/GEExecCalc/GEExecCalc_DamageTaken.h"
-#include "AbilitySystem/WAttributeSet.h"
-#include "WGameplayTags.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
+#include "WarriorGameplayTags.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-struct FWDamageCapture
+struct FWarriorDamageCapture
 {
 	DECLARE_ATTRIBUTE_CAPTUREDEF(AttackPower)
 	DECLARE_ATTRIBUTE_CAPTUREDEF(DefensePower)
 	DECLARE_ATTRIBUTE_CAPTUREDEF(DamageTaken)
 
-	FWDamageCapture()
+	FWarriorDamageCapture()
 	{
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UWAttributeSet,AttackPower,Source,false)
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UWAttributeSet,DefensePower,Target,false)
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UWAttributeSet,DamageTaken,Target,false)
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UWarriorAttributeSet,AttackPower,Source,false)
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UWarriorAttributeSet,DefensePower,Target,false)
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UWarriorAttributeSet,DamageTaken,Target,false)
 	}
 };
 
-static const FWDamageCapture& GetWDamageCapture()
+static const FWarriorDamageCapture& GetWarriorDamageCapture()
 {
-	static FWDamageCapture WDamageCapture;
-	return WDamageCapture;
+	static FWarriorDamageCapture WarriorDamageCapture;
+	return WarriorDamageCapture;
 }
 
 UGEExecCalc_DamageTaken::UGEExecCalc_DamageTaken()
 {	
 	/*Slow way of doing capture*/
 	//FProperty* AttackPowerProperty = FindFieldChecked<FProperty>(
-	//	UWAttributeSet::StaticClass(),
-	//	GET_MEMBER_NAME_CHECKED(UWAttributeSet,AttackPower)
+	//	UWarriorAttributeSet::StaticClass(),
+	//	GET_MEMBER_NAME_CHECKED(UWarriorAttributeSet,AttackPower)
 	//);
 
 	//FGameplayEffectAttributeCaptureDefinition AttackPowerCaptureDefinition(
@@ -43,9 +43,9 @@ UGEExecCalc_DamageTaken::UGEExecCalc_DamageTaken()
 
 	//RelevantAttributesToCapture.Add(AttackPowerCaptureDefinition);
 
-	RelevantAttributesToCapture.Add(GetWDamageCapture().AttackPowerDef);
-	RelevantAttributesToCapture.Add(GetWDamageCapture().DefensePowerDef);
-	RelevantAttributesToCapture.Add(GetWDamageCapture().DamageTakenDef);
+	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().AttackPowerDef);
+	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().DefensePowerDef);
+	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().DamageTakenDef);
 }
 
 void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const
@@ -62,7 +62,7 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 	EvaluateParameters.TargetTags = EffectSpec.CapturedTargetTags.GetAggregatedTags();
 
 	float SourceAttackPower = 0.f;
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWDamageCapture().AttackPowerDef,EvaluateParameters,SourceAttackPower);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWarriorDamageCapture().AttackPowerDef,EvaluateParameters,SourceAttackPower);
 	/*Debug::Print(TEXT("SourceAttackPower"),SourceAttackPower);*/
 
 	float BaseDamage = 0.f;
@@ -71,19 +71,19 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 
 	for (const TPair<FGameplayTag, float>& TagMagnitude : EffectSpec.SetByCallerTagMagnitudes)
 	{
-		if (TagMagnitude.Key.MatchesTagExact(WGameplayTags::Shared_SetByCaller_BaseDamage))
+		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Shared_SetByCaller_BaseDamage))
 		{
 			BaseDamage = TagMagnitude.Value;
 			/*Debug::Print(TEXT("BaseDamage"),BaseDamage);*/
 		}
 
-		if (TagMagnitude.Key.MatchesTagExact(WGameplayTags::Player_SetByCaller_AttackType_Light))
+		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_Light))
 		{
 			UsedLightAttckComboCount = TagMagnitude.Value;
 			/*Debug::Print(TEXT("UsedLightAttckComboCount"),UsedLightAttckComboCount);*/
 		}
 
-		if (TagMagnitude.Key.MatchesTagExact(WGameplayTags::Player_SetByCaller_AttackType_Heavy))
+		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_Heavy))
 		{
 			UsedHeavyAttackComboCount = TagMagnitude.Value;
 		/*	Debug::Print(TEXT("UsedHeavyAttackComboCount"),UsedHeavyAttackComboCount);*/
@@ -91,7 +91,7 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 	}
 	
 	float TargetDefensePower = 0.f;
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWDamageCapture().DefensePowerDef,EvaluateParameters,TargetDefensePower);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWarriorDamageCapture().DefensePowerDef,EvaluateParameters,TargetDefensePower);
 	/*Debug::Print(TEXT("TargetDefensePower"),TargetDefensePower);*/
 
 	if (UsedLightAttckComboCount != 0)
@@ -117,7 +117,7 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 	{
 		OutExecutionOutput.AddOutputModifier(
 			FGameplayModifierEvaluatedData(
-				GetWDamageCapture().DamageTakenProperty,
+				GetWarriorDamageCapture().DamageTakenProperty,
 				EGameplayModOp::Override,
 				FinalDamageDone
 			)

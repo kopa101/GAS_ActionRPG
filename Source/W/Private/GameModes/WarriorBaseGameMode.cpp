@@ -1,9 +1,9 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "GameModes/WBaseGameMode.h"
+#include "GameModes/WarriorBaseGameMode.h"
 
-AWBaseGameMode::AWBaseGameMode()
+AWarriorBaseGameMode::AWarriorBaseGameMode()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;

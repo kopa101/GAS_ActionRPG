@@ -2,14 +2,14 @@
 
 
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
-#include "AbilitySystem/Abilities/WHeroGameplayAbility.h"
-#include "AbilitySystem/WAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 
-void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UWAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
+void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
     Super::GiveToAbilitySystemComponent(InASCToGive, ApplyLevel);
  
-    for (const FWHeroAbilitySet& AbilitySet : HeroStartUpAbilitySets)
+    for (const FWarriorHeroAbilitySet& AbilitySet : HeroStartUpAbilitySets)
     {
         if(!AbilitySet.IsValid()) continue;
          

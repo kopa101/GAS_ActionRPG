@@ -12,7 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPercentChangedDelegate,float,NewP
  * 
  */
 UCLASS()
-class W_API UPawnUIComponent : public UPawnExtensionComponentBase
+class WARRIOR_API UPawnUIComponent : public UPawnExtensionComponentBase
 {
 	GENERATED_BODY()
 	

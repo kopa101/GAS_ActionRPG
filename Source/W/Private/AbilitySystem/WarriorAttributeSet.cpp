@@ -1,17 +1,17 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "AbilitySystem/WAttributeSet.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 #include "GameplayEffectExtension.h"
-#include "WFunctionLibrary.h"
-#include "WGameplayTags.h"
+#include "WarriorFunctionLibrary.h"
+#include "WarriorGameplayTags.h"
 #include "Interfaces/PawnUIInterface.h"
 #include "Components/UI/PawnUIComponent.h"
 #include "Components/UI/HeroUIComponent.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-UWAttributeSet::UWAttributeSet()
+UWarriorAttributeSet::UWarriorAttributeSet()
 {
 	InitCurrentHealth(1.f);
 	InitMaxHealth(1.f);
@@ -21,7 +21,7 @@ UWAttributeSet::UWAttributeSet()
 	InitDefensePower(1.f);
 }
 
-void UWAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+void UWarriorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {	
 	if (!CachedPawnUIInterface.IsValid())
 	{
@@ -51,16 +51,16 @@ void UWAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackD
 		
 		if (GetCurrentRage() == GetMaxRage())
 		{
-			UWFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WGameplayTags::Player_Status_Rage_Full);
+			UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WarriorGameplayTags::Player_Status_Rage_Full);
 		}
 		else if (GetCurrentRage() == 0.f)
 		{
-			UWFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WGameplayTags::Player_Status_Rage_None);
+			UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WarriorGameplayTags::Player_Status_Rage_None);
 		}
 		else
 		{
-			UWFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(),WGameplayTags::Player_Status_Rage_Full);
-			UWFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(),WGameplayTags::Player_Status_Rage_None);
+			UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(),WarriorGameplayTags::Player_Status_Rage_Full);
+			UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(),WarriorGameplayTags::Player_Status_Rage_None);
 		}
 
 		if (UHeroUIComponent* HeroUIComponent = CachedPawnUIInterface->GetHeroUIComponent())
@@ -91,7 +91,7 @@ void UWAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackD
 
 		if (GetCurrentHealth() == 0.f)
 		{	
-			UWFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WGameplayTags::Shared_Status_Dead);
+			UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),WarriorGameplayTags::Shared_Status_Dead);
 			
 		}
 	}

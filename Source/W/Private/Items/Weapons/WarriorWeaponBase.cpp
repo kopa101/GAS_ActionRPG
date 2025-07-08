@@ -1,13 +1,13 @@
 // Vince Petrelli All Rights Reserved
 
 
-#include "Items/Weapons/WWeaponBase.h"
+#include "Items/Weapons/WarriorWeaponBase.h"
 #include "Components/BoxComponent.h"
-#include "WFunctionLibrary.h"
+#include "WarriorFunctionLibrary.h"
 
-#include "WDebugHelper.h"
+#include "WarriorDebugHelper.h"
 
-AWWeaponBase::AWWeaponBase()
+AWarriorWeaponBase::AWarriorWeaponBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -23,7 +23,7 @@ AWWeaponBase::AWWeaponBase()
 	WeaponCollisionBox->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnCollisionBoxEndOverlap);
 }
 
-void AWWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 
@@ -31,14 +31,14 @@ void AWWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedCom
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (UWFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
 			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
 		}
 	}
 }
 
-void AWWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 
@@ -46,7 +46,7 @@ void AWWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedCompo
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (UWFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
 			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
 		}

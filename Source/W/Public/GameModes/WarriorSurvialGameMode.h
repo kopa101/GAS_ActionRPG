@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameModes/WBaseGameMode.h"
-#include "WSurvialGameMode.generated.h"
+#include "GameModes/WarriorBaseGameMode.h"
+#include "WarriorSurvialGameMode.generated.h"
 
-class AWEnemyCharacter;
+class AWarriorEnemyCharacter;
 
 UENUM(BlueprintType)
-enum class EWSurvialGameModeState : uint8
+enum class EWarriorSurvialGameModeState : uint8
 {
 	WaitSpawnNewWave,
 	SpawningNewWave,
@@ -20,12 +20,12 @@ enum class EWSurvialGameModeState : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FWEnemyWaveSpawnerInfo
+struct FWarriorEnemyWaveSpawnerInfo
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	TSoftClassPtr<AWEnemyCharacter> SoftEnemyClassToSpawn;
+	TSoftClassPtr<AWarriorEnemyCharacter> SoftEnemyClassToSpawn;
 
 	UPROPERTY(EditAnywhere)
 	int32 MinPerSpawnCount = 1;
@@ -35,24 +35,24 @@ struct FWEnemyWaveSpawnerInfo
 };
 
 USTRUCT(BlueprintType)
-struct FWEnemyWaveSpawnerTableRow : public FTableRowBase
+struct FWarriorEnemyWaveSpawnerTableRow : public FTableRowBase
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	TArray<FWEnemyWaveSpawnerInfo> EnemyWaveSpawnerDefinitions;
+	TArray<FWarriorEnemyWaveSpawnerInfo> EnemyWaveSpawnerDefinitions;
 
 	UPROPERTY(EditAnywhere)
 	int32 TotalEnemyToSpawnThisWave = 1;
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSurvialGameModeStateChangedDelegate,EWSurvialGameModeState,CurrentState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSurvialGameModeStateChangedDelegate,EWarriorSurvialGameModeState,CurrentState);
 
 /**
  * 
  */
 UCLASS()
-class W_API AWSurvialGameMode : public AWBaseGameMode
+class WARRIOR_API AWarriorSurvialGameMode : public AWarriorBaseGameMode
 {
 	GENERATED_BODY()
 	
@@ -62,10 +62,10 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	void SetCurrentSurvialGameModeState(EWSurvialGameModeState InState);
+	void SetCurrentSurvialGameModeState(EWarriorSurvialGameModeState InState);
 	bool HasFinishedAllWaves() const;
 	void PreLoadNextWaveEnemies();
-	FWEnemyWaveSpawnerTableRow* GetCurrentWaveSpawnerTableRow() const;
+	FWarriorEnemyWaveSpawnerTableRow* GetCurrentWaveSpawnerTableRow() const;
 	int32 TrySpawnWaveEnemies();
 	bool ShouldKeepSpawnEnemies() const;
 
@@ -73,7 +73,7 @@ private:
 	void OnEnemyDestroyed(AActor* DestroyedActor);
 
 	UPROPERTY()
-	EWSurvialGameModeState CurrentSurvialGameModeState;
+	EWarriorSurvialGameModeState CurrentSurvialGameModeState;
 
 	UPROPERTY(BlueprintAssignable,BlueprintCallable)
 	FOnSurvialGameModeStateChangedDelegate OnSurvialGameModeStateChanged;
@@ -109,9 +109,9 @@ private:
 	float WaveCompletedWaitTime = 5.f;
 
 	UPROPERTY()
-	TMap< TSoftClassPtr < AWEnemyCharacter >,UClass* > PreLoadedEnemyClassMap;
+	TMap< TSoftClassPtr < AWarriorEnemyCharacter >,UClass* > PreLoadedEnemyClassMap;
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void RegisterSpawnedEnemies(const TArray<AWEnemyCharacter*>& InEnemiesToRegister);
+	void RegisterSpawnedEnemies(const TArray<AWarriorEnemyCharacter*>& InEnemiesToRegister);
 };

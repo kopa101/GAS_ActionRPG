@@ -27,7 +27,7 @@ struct FRotateToFaceTargetTaskMemory
  * 
  */
 UCLASS()
-class W_API UBTTask_RotateToFaceTarget : public UBTTaskNode
+class WARRIOR_API UBTTask_RotateToFaceTarget : public UBTTaskNode
 {
 	GENERATED_BODY()
 	

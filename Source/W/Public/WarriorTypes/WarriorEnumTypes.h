@@ -1,35 +1,35 @@
 #pragma once
 
 UENUM()
-enum class EWConfirmType : uint8
+enum class EWarriorConfirmType : uint8
 {
 	Yes,
 	No
 };
 
 UENUM()
-enum class EWValidType : uint8
+enum class EWarriorValidType : uint8
 {
 	Valid,
 	Invalid
 };
 
 UENUM()
-enum class EWSuccessType : uint8
+enum class EWarriorSuccessType : uint8
 {
 	Successful,
 	Failed
 };
 
 UENUM()
-enum class EWCountDownActionInput : uint8
+enum class EWarriorCountDownActionInput : uint8
 {
 	Start,
 	Cancel
 };
 
 UENUM()
-enum class EWCountDownActionOutput : uint8
+enum class EWarriorCountDownActionOutput : uint8
 {
 	Updated,
 	Completed,
@@ -37,7 +37,7 @@ enum class EWCountDownActionOutput : uint8
 };
 
 UENUM(BlueprintType)
-enum class EWGameDifficulty : uint8
+enum class EWarriorGameDifficulty : uint8
 {
 	Easy,
 	Normal,
@@ -46,7 +46,7 @@ enum class EWGameDifficulty : uint8
 };
 
 UENUM(BlueprintType)
-enum class EWInputMode : uint8
+enum class EWarriorInputMode : uint8
 {
 	GameOnly,
 	UIOnly
